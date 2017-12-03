@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">头条新闻</string>
+
+    <!-- 侧边栏 -->
+    <string name="nav_theme">主题</string>
+    <string name="nav_settings">设置</string>
+    <string name="nav_share">分享</string>
+
+    <string name="new_search_hint">搜你想搜的</string>
+</resources>

@@ -1,0 +1,12 @@
+<resources>
+
+    <!-- 黑色箭头 -->
+    <style name="ThemeOverlay.Light" parent="ThemeOverlay.AppCompat.Light" />
+    <!-- 白色箭头 -->
+    <style name="ThemeOverlay.Dark" parent="ThemeOverlay.AppCompat.Dark" />
+    <!-- 白色背景 -->
+    <style name="PopupOverlay.Light" parent="ThemeOverlay.AppCompat.Light" />
+    <!-- 黑色背景 -->
+    <style name="PopupOverlay.Dark" parent="ThemeOverlay.AppCompat.Dark" />
+
+</resources>
