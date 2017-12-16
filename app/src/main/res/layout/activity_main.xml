@@ -5,32 +5,37 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     tools:context="cn.chhd.news.ui.activity.MainActivity">
 
-    <android.support.constraint.ConstraintLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <FrameLayout
             android:id="@+id/container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_above="@+id/navigation" />
 
         <android.support.design.widget.BottomNavigationView
             android:id="@+id/navigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?android:attr/windowBackground"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_alignParentBottom="true"
+            android:background="@color/color_view"
+            app:itemIconTint="@color/selector_bottom_nav_view"
+            app:itemTextColor="@color/selector_bottom_nav_view"
             app:menu="@menu/navigation" />
-    </android.support.constraint.ConstraintLayout>
+    </RelativeLayout>
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:background="@color/color_view"
         app:headerLayout="@layout/header_nav"
+        app:itemIconTint="@color/selector_nav_view"
+        app:itemTextColor="@color/selector_nav_view"
         app:menu="@menu/nav" />
 </android.support.v4.widget.DrawerLayout>

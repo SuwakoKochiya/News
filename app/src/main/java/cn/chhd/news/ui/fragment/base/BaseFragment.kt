@@ -6,4 +6,4 @@ import cn.chhd.news.global.Constant
 /**
  * Created by congh on 2017/12/3.
  */
-open class BaseFragment : Fragment()
+open class BaseFragment : Fragment(), Constant

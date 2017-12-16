@@ -1,13 +1,25 @@
 package cn.chhd.news.global
 
 import cn.chhd.mylibrary.global.BaseApplication
+import cn.chhd.news.di.component.AppComponent
+import cn.chhd.news.di.component.DaggerAppComponent
+import cn.chhd.news.di.module.AppModule
+import cn.chhd.news.di.module.HttpModule
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.Utils
+import com.facebook.stetho.Stetho
 
 /**
  * Created by congh on 2017/11/26.
  */
 class App : BaseApplication() {
+
+    val mComponent: AppComponent by lazy {
+        DaggerAppComponent.builder()
+                .appModule(AppModule(this))
+                .httpModule(HttpModule())
+                .build()
+    }
 
     override fun onCreate() {
         super.onCreate()
@@ -16,9 +28,11 @@ class App : BaseApplication() {
 
         Utils.init(this)
         initLog()
+
+        Stetho.initializeWithDefaults(this)
     }
 
-    fun initLog() {
+    private fun initLog() {
         LogUtils.getConfig()
                 .setLogSwitch(true)// 设置 log 总开关，包括输出到控制台和文件，默认开
                 .setConsoleSwitch(true)// 设置是否输出到控制台开关，默认开

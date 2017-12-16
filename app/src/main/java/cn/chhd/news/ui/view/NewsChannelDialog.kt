@@ -41,7 +41,7 @@ class NewsChannelDialog : DialogFragment(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(DialogFragment.STYLE_NORMAL, R.style.AppTheme)
+        setStyle(DialogFragment.STYLE_NORMAL, R.style.TransparentStatusBar)
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,

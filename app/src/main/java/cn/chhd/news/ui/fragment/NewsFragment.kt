@@ -13,8 +13,13 @@ import android.view.*
 import cn.chhd.mylibrary.ui.adapter.FragmentAdapter
 import cn.chhd.news.R
 import cn.chhd.news.bean.NewsChannel
+import cn.chhd.news.contract.NewsContract
+import cn.chhd.news.di.component.DaggerNewsComponent
+import cn.chhd.news.di.module.NewsModule
+import cn.chhd.news.global.App
 import cn.chhd.news.global.Constant.Companion.KEY_ENABLE_NEWS_CHANNEL
 import cn.chhd.news.global.Constant.Companion.KEY_UNENABLE_NEWS_CHANNEL
+import cn.chhd.news.presenter.NewsPresenter
 import cn.chhd.news.ui.fragment.base.BaseFragment
 import cn.chhd.news.ui.listener.OnNewsChannelChangeListener
 import cn.chhd.news.ui.view.NewsChannelDialog
@@ -23,14 +28,18 @@ import com.blankj.utilcode.util.SPUtils
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.fragment_news.*
+import javax.inject.Inject
 
-class NewsFragment : BaseFragment(), View.OnClickListener {
+class NewsFragment : BaseFragment(), NewsContract.View, View.OnClickListener {
 
     private val mFragmentList = ArrayList<Fragment>()
     private lateinit var mAdapter: FragmentAdapter
     private var mEnableList = ArrayList<NewsChannel>()
     private var mUnEnableList = ArrayList<NewsChannel>()
     private val mGson = Gson()
+
+    @Inject
+    lateinit var mPresenter: NewsPresenter
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -40,8 +49,28 @@ class NewsFragment : BaseFragment(), View.OnClickListener {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initNewsChannelDatas()
+        DaggerNewsComponent.builder()
+                .appComponent(App.mInstance.mComponent)
+                .newsModule(NewsModule(this))
+                .build().inject(this)
 
+        var enableJson = SPUtils.getInstance().getString(KEY_ENABLE_NEWS_CHANNEL)
+        var unEnableJson = SPUtils.getInstance().getString(KEY_ENABLE_NEWS_CHANNEL)
+        if (TextUtils.isEmpty(enableJson) && TextUtils.isEmpty(unEnableJson)) {
+            mPresenter.requestNewsChannelList()
+        } else {
+            initNewsChannelDatas()
+        }
+
+        LogUtils.i(this)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mPresenter.onDestroy()
+    }
+
+    private fun initView() {
         tab_layout.setupWithViewPager(view_pager)
 
         iv_add.setOnClickListener(this)
@@ -49,6 +78,7 @@ class NewsFragment : BaseFragment(), View.OnClickListener {
         mEnableList.mapTo(mFragmentList) { NewsArticleFragment.newInstance(it.channelName!!) }
         mAdapter = FragmentAdapter(childFragmentManager, mFragmentList)
         view_pager.adapter = mAdapter
+        view_pager.offscreenPageLimit = 1
     }
 
     private fun initNewsChannelDatas() {
@@ -60,32 +90,11 @@ class NewsFragment : BaseFragment(), View.OnClickListener {
         if (!TextUtils.isEmpty(json))
             mUnEnableList = mGson.fromJson<ArrayList<NewsChannel>>(json, type)
 
-        if (mEnableList.isEmpty()) loadLocalDatas()
+        initView()
     }
 
-    private fun loadLocalDatas() {
-        mEnableList.clear()
-        mUnEnableList.clear()
-        val names = resources.getStringArray(R.array.arrays_news_name)
-        val ids = resources.getStringArray(R.array.arrays_news_id)
-        for (i in 0..5) {
-            val newsChannel = NewsChannel()
-            newsChannel.channelName = names[i]
-            newsChannel.channelId = ids[i]
-            newsChannel.isEnable = true
-            newsChannel.position = i
-            mEnableList.add(newsChannel)
-        }
-        for (i in 6 until names.size) { // until：i in [1, names.size)
-            val newsChannel = NewsChannel()
-            newsChannel.channelName = names[i]
-            newsChannel.channelId = ids[i]
-            newsChannel.isEnable = false
-            newsChannel.position = i
-            mUnEnableList.add(newsChannel)
-        }
-        SPUtils.getInstance().put(KEY_ENABLE_NEWS_CHANNEL, mGson.toJson(mEnableList))
-        SPUtils.getInstance().put(KEY_UNENABLE_NEWS_CHANNEL, mGson.toJson(mUnEnableList))
+    override fun showNewsChannelList(list: ArrayList<String>) {
+        initNewsChannelDatas()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -108,7 +117,7 @@ class NewsFragment : BaseFragment(), View.OnClickListener {
         inflater?.inflate(R.menu.main, menu)
         val menuItem = menu?.findItem(R.id.action_search)
         val searchView = MenuItemCompat.getActionView(menuItem)
-        searchView.setOnClickListener {
+        searchView?.setOnClickListener {
         }
     }
 
@@ -120,8 +129,7 @@ class NewsFragment : BaseFragment(), View.OnClickListener {
                 dialog.show(fragmentManager)
                 dialog.mOnDismissListener = DialogInterface.OnDismissListener {
                     if (mEnableList.isEmpty()) {
-                        loadLocalDatas()
-                        mEnableList.mapTo(mFragmentList) { NewsArticleFragment.newInstance(it.channelName!!) }
+                        mPresenter.requestNewsChannelList()
                     }
                     mAdapter.notifyDataSetChanged(mFragmentList)
 

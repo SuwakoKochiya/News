@@ -3,8 +3,13 @@
     <string name="complete">完成</string>
     <string name="edit">编辑</string>
 
+    <string name="no_more_data">暂无更多数据</string>
+    <string name="network_connect_fail">网络连接失败</string>
+    <string name="retry">重试</string>
+
     <!-- 侧边栏 -->
-    <string name="nav_theme">主题</string>
+    <string name="nav_theme_hight">白天</string>
+    <string name="nav_theme_low">夜间</string>
     <string name="nav_settings">设置</string>
     <string name="nav_share">分享</string>
 

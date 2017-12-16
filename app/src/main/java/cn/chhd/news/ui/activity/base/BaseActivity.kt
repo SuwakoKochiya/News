@@ -1,6 +1,9 @@
 package cn.chhd.news.ui.activity.base
 
+import android.app.Activity
+import android.content.Context
 import android.os.Build
+import android.os.Bundle
 import android.support.annotation.ColorInt
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
@@ -11,6 +14,13 @@ import cn.chhd.news.global.Constant
  */
 
 open class BaseActivity : AppCompatActivity(), Constant {
+
+    protected lateinit var mActivity: Activity
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mActivity = this
+    }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {

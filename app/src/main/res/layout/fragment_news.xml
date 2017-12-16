@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context="cn.chhd.news.ui.fragment.NewsFragment">
 
     <android.support.design.widget.AppBarLayout
@@ -25,21 +26,21 @@
                 android:id="@+id/tab_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:color/white"
+                android:background="@color/color_view"
                 android:clipToPadding="false"
                 android:paddingRight="48dp"
-                app:tabIndicatorColor="@color/colorPrimary"
+                app:tabIndicatorColor="@color/color_primary"
                 app:tabIndicatorHeight="2dp"
                 app:tabMode="scrollable"
-                app:tabSelectedTextColor="@color/colorPrimary"
-                app:tabTextColor="@color/def_text_light" />
+                app:tabSelectedTextColor="@color/color_primary"
+                app:tabTextColor="@color/color_text_third" />
 
             <RelativeLayout
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_alignParentRight="true"
                 android:alpha="0.85"
-                android:background="@android:color/white"
+                android:background="@color/color_view"
                 android:theme="@style/ThemeOverlay.Light">
 
                 <ImageView
@@ -48,13 +49,13 @@
                     android:layout_height="48dp"
                     android:background="?attr/selectableItemBackground"
                     android:scaleType="center"
-                    android:src="@drawable/ic_add_gray_18dp" />
+                    app:srcCompat="@drawable/ic_add_gray_18dp" />
 
                 <View
                     android:layout_width="1dp"
                     android:layout_height="24dp"
                     android:layout_centerVertical="true"
-                    android:background="#CCC" />
+                    android:background="@color/color_line" />
             </RelativeLayout>
         </RelativeLayout>
     </android.support.design.widget.AppBarLayout>
@@ -63,5 +64,6 @@
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/color_view"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 </android.support.design.widget.CoordinatorLayout>

@@ -183,8 +183,8 @@ class NewsChannelAdapter(data: List<NewsChannel>) : BaseMultiItemQuickAdapter<Ne
                 .mapNotNull { it.findViewById<ImageView>(R.id.iv_delete) }
                 .forEach { it.visibility = if (isEdit) View.VISIBLE else View.INVISIBLE }
         /*for (i in 0 until visibleChildCount) {
-            val view = mRecyclerView.getChildAt(i)
-            val iv_delete = view.findViewById<ImageView>(R.id.iv_delete)
+            val View = mRecyclerView.getChildAt(i)
+            val iv_delete = View.findViewById<ImageView>(R.id.iv_delete)
             if (iv_delete != null) {
                 iv_delete.visibility = if (isEdit) View.VISIBLE else View.INVISIBLE
             }
@@ -283,7 +283,7 @@ class NewsChannelAdapter(data: List<NewsChannel>) : BaseMultiItemQuickAdapter<Ne
                 Animation.ABSOLUTE, targetX,
                 Animation.RELATIVE_TO_SELF, 0f,
                 Animation.ABSOLUTE, targetY)
-        // RecyclerView默认移动动画250ms 这里设置360ms 是为了防止在位移动画结束后 remove(view)过早 导致闪烁
+        // RecyclerView默认移动动画250ms 这里设置360ms 是为了防止在位移动画结束后 remove(View)过早 导致闪烁
         translateAnimation.duration = ANIM_TIME.toLong()
         translateAnimation.fillAfter = true
         return translateAnimation
