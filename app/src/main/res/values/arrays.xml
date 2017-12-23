@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="slide_return_entries">
+        <item>禁用</item>
+        <item>边缘触发</item>
+        <item>全屏触发</item>
+    </string-array>
+
+    <string-array name="slide_return_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="app_icon_entries">
+        <item>方形</item>
+        <item>圆形</item>
+    </string-array>
+
+    <string-array name="app_icon_values">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <string-array name="app_icons">
+        <item>ic_launcher</item>
+        <item>ic_launcher_round</item>
+    </string-array>
+
+    <string-array name="theme_color_entries">
+        <item>红色</item>
+        <item>绿色</item>
+        <item>蓝色</item>
+    </string-array>
+
+    <string-array name="theme_color_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="theme_colors">
+        <item>#F44336</item>
+        <item>#4CAF50</item>
+        <item>#2196F3</item>
+    </string-array>
+</resources>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="cn.chhd.news.ui.fragment.GeneralPreferenceFragment">
+
+    <PreferenceCategory android:title="基本设置">
+
+        <SwitchPreference
+            android:key="@string/pref_no_photo"
+            android:summary="仅在Wi-Fi环境下才会自动加载图片"
+            android:title="省流量模式" />
+
+        <ListPreference
+            android:defaultValue="0"
+            android:entries="@array/slide_return_entries"
+            android:entryValues="@array/slide_return_values"
+            android:key="pref_slide_return"
+            android:summary="禁用"
+            android:title="滑动返回" />
+
+        <Preference android:title="字体大小" />
+
+        <Preference android:title="自动切换日夜间模式" />
+
+        <Preference
+            android:summary="包括图片、音频和视频缓存 (共0MB)"
+            android:title="清除缓存" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="外观">
+
+        <cn.chhd.news.ui.view.IconListPreference
+            android:defaultValue="0"
+            android:entries="@array/app_icon_entries"
+            android:entryValues="@array/app_icon_values"
+            android:key="pref_app_icon"
+            android:summary="重启App生效"
+            android:title="更换图标"
+            app:app_icons="@array/app_icons" />
+
+        <cn.chhd.news.ui.view.ColorListPreference
+            android:defaultValue="0"
+            android:entries="@array/theme_color_entries"
+            android:entryValues="@array/theme_color_values"
+            android:key="pref_theme_color"
+            android:title="主题颜色"
+            app:theme_colors="@array/theme_colors" />
+
+        <SwitchPreference
+            android:key="pref_navigation_bar"
+            android:title="导航栏着色" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="关于">
+
+        <Preference android:title="开源许可" />
+
+        <Preference
+            android:summary="当前版本 1.0.0"
+            android:title="检查更新" />
+    </PreferenceCategory>
+</PreferenceScreen>

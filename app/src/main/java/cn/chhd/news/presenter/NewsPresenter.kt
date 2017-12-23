@@ -1,9 +1,11 @@
 package cn.chhd.news.presenter
 
 import cn.chhd.news.bean.NewsChannel
+import cn.chhd.news.bean.ResponseData
 import cn.chhd.news.contract.NewsContract
 import cn.chhd.news.global.Config
 import cn.chhd.news.global.Constant
+import cn.chhd.news.http.RxHttpReponseCompat
 import cn.chhd.news.http.SimpleSubscriber
 import cn.chhd.news.presenter.base.BasePresenter
 import com.blankj.utilcode.util.LogUtils
@@ -18,11 +20,11 @@ class NewsPresenter
 @Inject constructor(private val model: NewsContract.Model, private val view: NewsContract.View)
     : BasePresenter<NewsContract.Model, NewsContract.View>(model, view) {
 
-    private lateinit var mSubscriber: SimpleSubscriber<ArrayList<String>>
+    private var mSubscriber: SimpleSubscriber<ArrayList<String>>? = null
 
     fun requestNewsChannelList() {
         mSubscriber = getSubscriber()
-        model.getNewsChannelList(Config.JISU_APP_KEY).subscribe(mSubscriber)
+        model.getNewsChannelList(Config.JISU_APP_KEY).compose(RxHttpReponseCompat.transform()).subscribe(mSubscriber)
     }
 
     private fun getSubscriber(): SimpleSubscriber<ArrayList<String>> {
@@ -53,8 +55,6 @@ class NewsPresenter
                 SPUtils.getInstance().put(Constant.KEY_ENABLE_NEWS_CHANNEL, Gson().toJson(enableList))
                 SPUtils.getInstance().put(Constant.KEY_UNENABLE_NEWS_CHANNEL, Gson().toJson(unEnableList))
 
-                LogUtils.i(enableList.size, enableList)
-
                 view.showNewsChannelList(list)
             }
 
@@ -62,6 +62,6 @@ class NewsPresenter
     }
 
     override fun onDestroy() {
-        mSubscriber.dispose()
+        mSubscriber?.dispose()
     }
 }

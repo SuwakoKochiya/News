@@ -11,6 +11,7 @@
         android:background="@drawable/shape_fill_gray_2"
         android:gravity="center"
         android:text="关注"
+        android:textColor="@color/color_text_second"
         android:textSize="@dimen/text_size_small" />
 
     <ImageView

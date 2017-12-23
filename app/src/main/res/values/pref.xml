@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="pref_night_mode">pref_night_mode</string>
+    <string name="pref_no_photo">pref_no_photo</string>
+
+</resources>

@@ -9,11 +9,13 @@
     <color name="color_text_third">#999999</color>
     <color name="color_text_hint">#999999</color>
 
-    <color name="color_line">#e7e7e7</color>
+    <color name="color_line">#E7E7E7</color>
+    <color name="color_image">#EDEDED</color>
 
-    <color name="color_view">#FFFFFF</color>
-    <color name="color_root">#FAFAFA</color>
+    <color name="color_background">#FFFFFF</color>
+    <color name="color_background_light">#FFFFFF</color>
+    <color name="color_background_deep">#FFFFFF</color>
     <color name="color_primary">#F44336</color>
 
-    <color name="color_white_to_dark_second">#FFFFFF</color>
+    <color name="color_gray">#F4F2F6</color>
 </resources>

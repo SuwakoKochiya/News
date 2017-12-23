@@ -2,6 +2,8 @@ package cn.chhd.news
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
+import cn.chhd.news.http.SimpleSubscriber
+import io.reactivex.Flowable
 
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -20,5 +22,7 @@ class ExampleInstrumentedTest {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getTargetContext()
         assertEquals("cn.chhd.news", appContext.packageName)
+
     }
+
 }

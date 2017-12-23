@@ -6,6 +6,14 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:alertDialogTheme">@style/AlertDialogTheme</item>
+    </style>
+
+    <style name="AlertDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorPrimary">@color/color_text_first</item>
+        <item name="colorPrimaryDark">@color/color_text_first</item>
+        <item name="colorAccent">@color/color_text_first</item>
+        <item name="android:background">@color/color_background_light</item>
     </style>
 
     <style name="TransparentStatusBar" parent="@style/AppTheme"></style>
@@ -15,5 +23,10 @@
     <style name="DialogBottomSlideAnim" mce_bogus="1" parent="android:Animation">
         <item name="android:windowEnterAnimation">@anim/dialog_bottom_slide_in</item>
         <item name="android:windowExitAnimation">@anim/dialog_bottom_slide_out</item>
+    </style>
+
+    <style name="PreferenceTheme" parent="AppTheme">
+        <item name="android:textColor">@color/color_text_first</item>
+        <item name="android:textColorSecondary">@color/color_text_second</item>
     </style>
 </resources>

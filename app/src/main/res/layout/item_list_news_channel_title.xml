@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:text="我的频道"
-        android:textColor="@color/color_text_333333"
+        android:textColor="@color/color_text_first"
         android:textSize="@dimen/text_size_big" />
 
     <TextView
@@ -24,7 +24,7 @@
         android:layout_marginLeft="@dimen/margin_small"
         android:layout_weight="1"
         android:text="点击进入频道"
-        android:textColor="@color/color_text_666666"
+        android:textColor="@color/color_text_second"
         android:textSize="@dimen/text_size_small" />
 
     <TextView

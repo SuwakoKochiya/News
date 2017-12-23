@@ -4,6 +4,7 @@ import cn.chhd.news.bean.ListData
 import cn.chhd.news.bean.NewsArticle
 import cn.chhd.news.contract.NewsArticleContract
 import cn.chhd.news.global.Config
+import cn.chhd.news.http.RxHttpReponseCompat
 import cn.chhd.news.http.SimpleSubscriber
 import cn.chhd.news.presenter.base.BasePresenter
 import javax.inject.Inject
@@ -15,27 +16,34 @@ class NewsArticlePresenter
 @Inject constructor(private val model: NewsArticleContract.Model, private val view: NewsArticleContract.View)
     : BasePresenter<NewsArticleContract.Model, NewsArticleContract.View>(model, view) {
 
-    private lateinit var mSubscriber: SimpleSubscriber<ListData<NewsArticle>>
+    private var mSubscriber: SimpleSubscriber<ListData<NewsArticle>>? = null
 
     fun requestNewsArticleList(channel: String,
                                num: Int,
                                start: Int) {
         mSubscriber = getSubscriber()
-        model.getNewsArticlelList(Config.JISU_APP_KEY, channel, num, start).subscribe(mSubscriber)
+        model.getNewsArticlelList(Config.JISU_APP_KEY, channel, num, start).compose(RxHttpReponseCompat.transform()).subscribe(mSubscriber)
     }
 
     private fun getSubscriber(): SimpleSubscriber<ListData<NewsArticle>> {
-        return object : SimpleSubscriber<ListData<NewsArticle>>() {
+        return object : SimpleSubscriber<ListData<NewsArticle>>(view) {
 
             override fun success(t: ListData<NewsArticle>) {
-                t.list?.let {
-                    view.showNewsArticlelList(it)
+                if (t.list != null && !t.list?.isEmpty()!!) {
+                    view.showNewsArticlelList(t.list!!)
+                } else {
+                    view.showPageEmpty()
                 }
+            }
+
+            override fun error(e: Throwable) {
+                super.error(e)
+                view.showPageError()
             }
         }
     }
 
     override fun onDestroy() {
-        mSubscriber.dispose()
+        mSubscriber?.dispose()
     }
 }

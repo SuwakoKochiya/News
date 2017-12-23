@@ -66,8 +66,4 @@ public class FragmentAdapter extends FragmentStatePagerAdapter {
         notifyDataSetChanged();
     }
 
-    @Override
-    public int getItemPosition(Object object) {
-        return POSITION_NONE;
-    }
 }

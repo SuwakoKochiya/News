@@ -11,10 +11,10 @@
 
     <include layout="@layout/app_bar_layout" />
 
-    <ListView
-        android:id="@android:id/list"
+    <FrameLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:dividerHeight="0.5dp"
+        android:background="@color/color_background"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 </android.support.design.widget.CoordinatorLayout>

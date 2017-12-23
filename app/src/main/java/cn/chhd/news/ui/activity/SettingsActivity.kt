@@ -1,20 +1,28 @@
 package cn.chhd.news.ui.activity
 
+import android.app.Fragment
 import android.os.Bundle
-import cn.chhd.mylibrary.ui.activity.AppCompatPreferenceActivity
 import cn.chhd.news.R
-import com.blankj.utilcode.util.LogUtils
-import kotlinx.android.synthetic.main.app_bar_layout.*
+import cn.chhd.news.ui.activity.base.BaseActivity
+import cn.chhd.news.ui.fragment.GeneralPreferenceFragment
+import kotlinx.android.synthetic.main.toolbar.*
 
 
-class SettingsActivity : AppCompatPreferenceActivity() {
+class SettingsActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
 
-        app_bar.viewTreeObserver.addOnGlobalLayoutListener {
-            LogUtils.i(app_bar.elevation)
-        }
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = getString(R.string.settings_title)
+
+        val fragment = Fragment.instantiate(this, GeneralPreferenceFragment::class.java.name)
+        val transaction = fragmentManager.beginTransaction()
+        transaction.setTransition(android.app.FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+        transaction.replace(R.id.container, fragment)
+        transaction.commitAllowingStateLoss()
     }
+
 }

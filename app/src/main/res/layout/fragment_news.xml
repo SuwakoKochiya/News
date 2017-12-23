@@ -26,7 +26,7 @@
                 android:id="@+id/tab_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/color_view"
+                android:background="@color/color_background"
                 android:clipToPadding="false"
                 android:paddingRight="48dp"
                 app:tabIndicatorColor="@color/color_primary"
@@ -40,7 +40,7 @@
                 android:layout_height="48dp"
                 android:layout_alignParentRight="true"
                 android:alpha="0.85"
-                android:background="@color/color_view"
+                android:background="@color/color_background"
                 android:theme="@style/ThemeOverlay.Light">
 
                 <ImageView
@@ -64,6 +64,6 @@
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/color_view"
+        android:background="@color/color_background"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 </android.support.design.widget.CoordinatorLayout>

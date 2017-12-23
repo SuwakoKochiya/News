@@ -10,9 +10,13 @@ import android.support.v7.app.AppCompatDelegate
 import android.view.MenuItem
 import cn.chhd.mylibrary.util.BottomNavigationViewHelper
 import cn.chhd.news.R
+import cn.chhd.news.http.SimpleSubscriber
 import cn.chhd.news.ui.activity.base.BaseActivity
 import cn.chhd.news.ui.fragment.EmptyFragment
 import cn.chhd.news.ui.fragment.NewsFragment
+import cn.chhd.news.util.SettingsUtils
+import com.blankj.utilcode.util.LogUtils
+import io.reactivex.Flowable
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
@@ -34,6 +38,7 @@ class MainActivity : BaseActivity() {
         navigation.setOnNavigationItemSelectedListener(onBottomNavItemSelectedListener)
 
         nav.setNavigationItemSelectedListener(oNavItemSelectedListener)
+
     }
 
     private val oNavItemSelectedListener = NavigationView.OnNavigationItemSelectedListener { item ->
@@ -49,8 +54,10 @@ class MainActivity : BaseActivity() {
                 val mode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
                 if (mode == Configuration.UI_MODE_NIGHT_YES) {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    SettingsUtils.setNightMode(false)
                 } else {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                    SettingsUtils.setNightMode(true)
                 }
 //                recreate()
                 val intent = Intent(this@MainActivity, MainActivity::class.java)

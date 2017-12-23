@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="IconListPreference">
+        <attr name="app_icons" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="ColorListPreference">
+        <attr name="theme_colors" format="reference" />
+    </declare-styleable>
+</resources>

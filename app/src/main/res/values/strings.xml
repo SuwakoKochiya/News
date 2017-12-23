@@ -8,7 +8,7 @@
     <string name="retry">重试</string>
 
     <!-- 侧边栏 -->
-    <string name="nav_theme_hight">白天</string>
+    <string name="nav_theme_hight">日间</string>
     <string name="nav_theme_low">夜间</string>
     <string name="nav_settings">设置</string>
     <string name="nav_share">分享</string>
@@ -21,4 +21,5 @@
     <string name="news_dialog_enter">点击进入频道</string>
     <string name="news_dialog_add">点击添加频道</string>
 
+    <string name="settings_title">设置</string>
 </resources>

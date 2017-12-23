@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:background="@color/color_view"
+            android:background="@color/color_background"
             app:itemIconTint="@color/selector_bottom_nav_view"
             app:itemTextColor="@color/selector_bottom_nav_view"
             app:menu="@menu/navigation" />
@@ -33,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="@color/color_view"
+        android:background="@color/color_background"
         app:headerLayout="@layout/header_nav"
         app:itemIconTint="@color/selector_nav_view"
         app:itemTextColor="@color/selector_nav_view"

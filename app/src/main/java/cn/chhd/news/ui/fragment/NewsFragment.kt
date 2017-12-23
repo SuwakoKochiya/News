@@ -61,8 +61,6 @@ class NewsFragment : BaseFragment(), NewsContract.View, View.OnClickListener {
         } else {
             initNewsChannelDatas()
         }
-
-        LogUtils.i(this)
     }
 
     override fun onDestroy() {
@@ -78,7 +76,6 @@ class NewsFragment : BaseFragment(), NewsContract.View, View.OnClickListener {
         mEnableList.mapTo(mFragmentList) { NewsArticleFragment.newInstance(it.channelName!!) }
         mAdapter = FragmentAdapter(childFragmentManager, mFragmentList)
         view_pager.adapter = mAdapter
-        view_pager.offscreenPageLimit = 1
     }
 
     private fun initNewsChannelDatas() {
@@ -131,7 +128,7 @@ class NewsFragment : BaseFragment(), NewsContract.View, View.OnClickListener {
                     if (mEnableList.isEmpty()) {
                         mPresenter.requestNewsChannelList()
                     }
-                    mAdapter.notifyDataSetChanged(mFragmentList)
+                    mAdapter.notifyDataSetChanged()
 
                     SPUtils.getInstance().put(KEY_ENABLE_NEWS_CHANNEL, mGson.toJson(mEnableList))
                     SPUtils.getInstance().put(KEY_UNENABLE_NEWS_CHANNEL, mGson.toJson(mUnEnableList))

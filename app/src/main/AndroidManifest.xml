@@ -3,6 +3,7 @@
     package="cn.chhd.news">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:name=".global.App"
@@ -19,7 +20,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.SettingsActivity"></activity>
+        <activity
+            android:name=".ui.activity.SettingsActivity"
+            android:theme="@style/PreferenceTheme"></activity>
     </application>
 
 </manifest>

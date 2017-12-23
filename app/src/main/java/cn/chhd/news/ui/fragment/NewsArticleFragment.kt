@@ -1,6 +1,7 @@
 package cn.chhd.news.ui.fragment
 
 
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
@@ -17,7 +18,10 @@ import cn.chhd.news.global.Constant.Companion.SWIPE_REFRESH_LAYOUT_COLORS
 import cn.chhd.news.presenter.NewsArticlePresenter
 import cn.chhd.news.ui.adapter.NewsArticleAdapter
 import cn.chhd.news.ui.fragment.base.ProgressFragment
+import com.blankj.utilcode.util.LogUtils
+import com.chad.library.adapter.base.BaseQuickAdapter
 import kotlinx.android.synthetic.main.fragment_news_article.*
+import java.util.function.Predicate
 import javax.inject.Inject
 
 
@@ -38,6 +42,7 @@ class NewsArticleFragment : ProgressFragment(), NewsArticleContract.View {
         if (arguments != null) {
             mTitle = arguments.getString(FragmentAdapter.KEY_TITLE)
         }
+
     }
 
     override fun getContentResId(): Int {
@@ -47,10 +52,13 @@ class NewsArticleFragment : ProgressFragment(), NewsArticleContract.View {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        swipe_refresh_layout.setProgressBackgroundColorSchemeResource(R.color.color_background_light)
         swipe_refresh_layout.setColorSchemeResources(*SWIPE_REFRESH_LAYOUT_COLORS)
         swipe_refresh_layout.setOnRefreshListener(onRefreshListener)
 
-        mAdapter = NewsArticleAdapter(mNewsArticleList)
+        mAdapter = NewsArticleAdapter(this, mNewsArticleList)
+        mAdapter.openLoadAnimation()
+        mAdapter.onItemClickListener = onItemClickListener
         recycler_view.layoutManager = LinearLayoutManager(activity)
         recycler_view.adapter = mAdapter
 
@@ -64,12 +72,17 @@ class NewsArticleFragment : ProgressFragment(), NewsArticleContract.View {
                 .newsArticleModule(NewsArticleModule(this))
                 .build().inject(this)
 
-        refresh()
+//        refresh()
+    }
+
+    private val onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
+        if (adapter.getItemViewType(position) == NewsArticle.ITEM_REFRESH) {
+            refresh()
+        }
     }
 
     private val onRefreshListener = SwipeRefreshLayout.OnRefreshListener {
         present.requestNewsArticleList(mTitle!!, mNum, mStart)
-
     }
 
     private fun refresh() {
@@ -80,17 +93,47 @@ class NewsArticleFragment : ProgressFragment(), NewsArticleContract.View {
     }
 
     override fun showNewsArticlelList(list: ArrayList<NewsArticle>) {
-        if (swipe_refresh_layout.isRefreshing) swipe_refresh_layout.isRefreshing = false
-        mNewsArticleList.addAll(list)
+        mStart += mNum
+        if (!mNewsArticleList.isEmpty()) {
+            removeRefreshItem(mNewsArticleList)
+            mNewsArticleList.add(0, NewsArticle())
+        }
+        mNewsArticleList.addAll(0, list)
         mAdapter.notifyDataSetChanged()
+        recycler_view.scrollToPosition(0)
+    }
+
+    private fun removeRefreshItem(list: ArrayList<NewsArticle>) {
+        val iterator = list.iterator()
+        while (iterator.hasNext()) {
+            val item = iterator.next()
+            if (item.itemType == NewsArticle.ITEM_REFRESH) {
+                iterator.remove()
+            }
+        }
     }
 
     override fun retry() {
+        present.requestNewsArticleList(mTitle!!, mNum, mStart)
+    }
 
+    override fun showPageEmpty() {
+        if (mNewsArticleList.isEmpty()) {
+            super.showPageEmpty()
+        }
+    }
+
+    override fun showPageError() {
+        if (mNewsArticleList.isEmpty()) {
+            super.showErrorView()
+        } else {
+            ToastUtils.showLong(R.string.network_connect_fail)
+        }
     }
 
     override fun showPageComplete() {
-
+        LogUtils.v("showPageComplete -> $mTitle: $swipe_refresh_layout")
+        if (swipe_refresh_layout.isRefreshing) swipe_refresh_layout.isRefreshing = false
     }
 
     override fun onDestroy() {

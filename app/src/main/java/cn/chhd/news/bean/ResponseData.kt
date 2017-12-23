@@ -14,4 +14,7 @@ class ResponseData<T> {
     var status: String? = null
     var msg: String? = null
     var result: T? = null
+
+    val isSuccess: Boolean
+        get() = status == "0"
 }

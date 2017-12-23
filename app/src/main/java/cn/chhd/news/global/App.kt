@@ -1,10 +1,13 @@
 package cn.chhd.news.global
 
+import android.support.v7.app.AppCompatDelegate
 import cn.chhd.mylibrary.global.BaseApplication
 import cn.chhd.news.di.component.AppComponent
 import cn.chhd.news.di.component.DaggerAppComponent
 import cn.chhd.news.di.module.AppModule
 import cn.chhd.news.di.module.HttpModule
+import cn.chhd.news.util.ImageLoader
+import cn.chhd.news.util.SettingsUtils
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.Utils
 import com.facebook.stetho.Stetho
@@ -30,6 +33,12 @@ class App : BaseApplication() {
         initLog()
 
         Stetho.initializeWithDefaults(this)
+
+        val mode = if (SettingsUtils.isNightMode()) AppCompatDelegate.MODE_NIGHT_YES
+        else AppCompatDelegate.MODE_NIGHT_NO
+        AppCompatDelegate.setDefaultNightMode(mode)
+
+        ImageLoader.instance.configuration.setNoPhoto(SettingsUtils.isNoPhoto())
     }
 
     private fun initLog() {

@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.os.Handler
 import android.support.v4.app.Fragment
-import cn.chhd.news.bean.ResponseData
 import cn.chhd.news.contract.IPageView
 import com.blankj.utilcode.util.LogUtils
 import io.reactivex.subscribers.ResourceSubscriber
@@ -12,53 +11,60 @@ import io.reactivex.subscribers.ResourceSubscriber
 /**
  * Created by 葱花滑蛋 on 2017/12/12.
  */
-open abstract class SimpleSubscriber<T> : ResourceSubscriber<ResponseData<T>> {
+open abstract class SimpleSubscriber<T> : ResourceSubscriber<T> {
 
-    private val delayMillis = 2000
-    private var startTimeMillis: Long = 0
+    private val mDelayMillis = 1000
+    private var mStartTimeMillis: Long = 0
 
-    private var view: IPageView? = null
+    private var mView: IPageView? = null
 
     constructor()
 
     constructor(view: IPageView) {
-        this.view = view
+        this.mView = view
     }
 
     override final fun onStart() {
         super.onStart()
-        startTimeMillis = System.currentTimeMillis()
-        if (isShowDialog() && view != null) {
+        mStartTimeMillis = System.currentTimeMillis()
+        if (isShowDialog() && mView != null) {
             var context: Context? = null
-            if (view is Fragment) {
-                context = (view as Fragment).activity
-            } else if (view is Activity) {
-                context = view as Activity
+            if (mView is Fragment) {
+                context = (mView as Fragment).activity
+            } else if (mView is Activity) {
+                context = mView as Activity
             }
             if (context != null) {
             }
         }
     }
 
-    override final fun onNext(t: ResponseData<T>) {
+    override final fun onNext(t: T) {
         delayExcute(NextRun(t))
     }
 
-    private inner class NextRun(private val t: ResponseData<T>) : Runnable {
+    private inner class NextRun(private val t: T) : Runnable {
 
         override fun run() {
-            if (t.result is String) {
+            if (t is String) {
                 LogUtils.i("json: " + t)
             }
-            view?.showPageSuccess()
-            t.result?.let {
-                success(it)
-            }
+            mView?.showPageSuccess()
+            success(t)
         }
     }
 
     override final fun onComplete() {
-        after()
+        delayExcute(CompleteRun())
+    }
+
+    private inner class CompleteRun : Runnable {
+
+        override fun run() {
+            mView?.showPageSuccess()
+            mView?.showPageComplete()
+            after()
+        }
     }
 
     override final fun onError(e: Throwable) {
@@ -68,40 +74,39 @@ open abstract class SimpleSubscriber<T> : ResourceSubscriber<ResponseData<T>> {
     private inner class ErrorRun(private val e: Throwable) : Runnable {
 
         override fun run() {
-            view?.showPageError()
             error(e)
+            mView?.showPageComplete()
             after()
         }
     }
 
     private fun delayExcute(r: Runnable) {
         val timeDif = getTimeDif()
-        if (timeDif > delayMillis) {
+        if (timeDif > mDelayMillis) {
             Handler().post(r)
         } else {
-            Handler().postDelayed({ Handler().post(r) }, delayMillis - timeDif)
+            Handler().postDelayed({ Handler().post(r) }, mDelayMillis - timeDif)
         }
     }
 
     private fun getTimeDif(): Long {
-        return System.currentTimeMillis() - startTimeMillis
+        return System.currentTimeMillis() - mStartTimeMillis
     }
 
-    protected fun before() {
+    protected open fun before() {
 
     }
 
     abstract fun success(t: T)
 
-    protected fun error(e: Throwable) {
+    protected open fun error(e: Throwable) {
 
     }
 
-    protected fun after() {
-
+    protected open fun after() {
     }
 
-    protected fun isShowDialog(): Boolean {
+    protected open fun isShowDialog(): Boolean {
         return false
     }
 }
