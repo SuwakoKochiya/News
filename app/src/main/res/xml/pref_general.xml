@@ -2,40 +2,54 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="cn.chhd.news.ui.fragment.GeneralPreferenceFragment">
+    tools:context="cn.chhd.news.ui.fragment.PreferenceGeneralFragment">
 
-    <PreferenceCategory android:title="基本设置">
+    <PreferenceCategory
+        android:layout="@layout/preference_category"
+        android:title="基本设置">
 
         <SwitchPreference
             android:key="@string/pref_no_photo"
+            android:layout="@layout/preference"
             android:summary="仅在Wi-Fi环境下才会自动加载图片"
             android:title="省流量模式" />
 
-        <ListPreference
+        <com.afollestad.materialdialogs.prefs.MaterialListPreference
             android:defaultValue="0"
             android:entries="@array/slide_return_entries"
             android:entryValues="@array/slide_return_values"
-            android:key="pref_slide_return"
+            android:key="@string/pref_slide_return"
+            android:layout="@layout/preference"
             android:summary="禁用"
             android:title="滑动返回" />
 
-        <Preference android:title="字体大小" />
-
-        <Preference android:title="自动切换日夜间模式" />
+        <Preference
+            android:key="@string/pref_text_size"
+            android:layout="@layout/preference"
+            android:title="字体大小" />
 
         <Preference
+            android:key="@string/pref_auto_night_mode"
+            android:layout="@layout/preference"
+            android:title="自动切换日夜间模式" />
+
+        <Preference
+            android:key="@string/pref_cache_size"
+            android:layout="@layout/preference"
             android:summary="包括图片、音频和视频缓存 (共0MB)"
             android:title="清除缓存" />
-
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="外观">
+    <PreferenceCategory
+        android:layout="@layout/preference_category"
+        android:title="外观">
 
         <cn.chhd.news.ui.view.IconListPreference
             android:defaultValue="0"
             android:entries="@array/app_icon_entries"
             android:entryValues="@array/app_icon_values"
-            android:key="pref_app_icon"
+            android:key="@string/pref_app_icon"
+            android:layout="@layout/preference"
             android:summary="重启App生效"
             android:title="更换图标"
             app:app_icons="@array/app_icons" />
@@ -44,21 +58,31 @@
             android:defaultValue="0"
             android:entries="@array/theme_color_entries"
             android:entryValues="@array/theme_color_values"
-            android:key="pref_theme_color"
+            android:key="@string/pref_theme_color"
+            android:layout="@layout/preference"
             android:title="主题颜色"
             app:theme_colors="@array/theme_colors" />
 
         <SwitchPreference
-            android:key="pref_navigation_bar"
+            android:defaultValue="true"
+            android:key="@string/pref_navigation_bar"
+            android:layout="@layout/preference"
             android:title="导航栏着色" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="关于">
-
-        <Preference android:title="开源许可" />
+    <PreferenceCategory
+        android:layout="@layout/preference_category"
+        android:title="关于">
 
         <Preference
-            android:summary="当前版本 1.0.0"
+            android:key="@string/pref_license"
+            android:layout="@layout/preference"
+            android:title="开源许可" />
+
+        <Preference
+            android:key="@string/pref_upgrade"
+            android:layout="@layout/preference"
+            android:summary="当前版本 1.0"
             android:title="检查更新" />
     </PreferenceCategory>
 </PreferenceScreen>

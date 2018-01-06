@@ -1,32 +1,61 @@
 <resources>
-
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:alertDialogTheme">@style/AlertDialogTheme</item>
+
+        <!-- These values must be set for this mechanism to work -->
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+
+        <item name="md_dark_theme">@bool/md_dark_theme</item>
     </style>
 
-    <style name="AlertDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="colorPrimary">@color/color_text_first</item>
-        <item name="colorPrimaryDark">@color/color_text_first</item>
-        <item name="colorAccent">@color/color_text_first</item>
-        <item name="android:background">@color/color_background_light</item>
+    <style name="MainTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="md_dark_theme">@bool/md_dark_theme</item>
     </style>
-
-    <style name="TransparentStatusBar" parent="@style/AppTheme"></style>
-
-    <style name="DrawStatusBarTheme" parent="@style/AppTheme"></style>
 
     <style name="DialogBottomSlideAnim" mce_bogus="1" parent="android:Animation">
         <item name="android:windowEnterAnimation">@anim/dialog_bottom_slide_in</item>
         <item name="android:windowExitAnimation">@anim/dialog_bottom_slide_out</item>
     </style>
 
-    <style name="PreferenceTheme" parent="AppTheme">
-        <item name="android:textColor">@color/color_text_first</item>
-        <item name="android:textColorSecondary">@color/color_text_second</item>
+    <style name="WindowAnimationFadeInOut"> <!-- 日间夜间模式切换动画，解决recreate()时闪烁的问题 -->
+        <item name="android:windowEnterAnimation">@anim/fade_in</item>
+        <item name="android:windowExitAnimation">@anim/fade_out</item>
+    </style>
+
+    <style name="AppTheme.Red" parent="AppTheme">
+        <item name="colorPrimary">@color/material_red_500</item>
+        <item name="colorPrimaryDark">@color/material_red_700</item>
+        <item name="colorAccent">@color/material_red_a700</item>
+
+        <item name="color_primary">@color/material_red_500</item>
+        <item name="color_navigation_bar">@color/material_red_500</item>
+    </style>
+
+    <style name="AppTheme.Green" parent="AppTheme">
+        <item name="colorPrimary">@color/material_green_500</item>
+        <item name="colorPrimaryDark">@color/material_green_700</item>
+        <item name="colorAccent">@color/material_green_a700</item>
+
+        <item name="color_primary">@color/material_green_500</item>
+        <item name="color_navigation_bar">@color/material_green_500</item>
+    </style>
+
+    <style name="AppTheme.Blue" parent="AppTheme">
+        <item name="colorPrimary">@color/material_blue_500</item>
+        <item name="colorPrimaryDark">@color/material_blue_700</item>
+        <item name="colorAccent">@color/material_blue_a700</item>
+
+        <item name="color_primary">@color/material_blue_500</item>
+        <item name="color_navigation_bar">@color/material_blue_500</item>
     </style>
 </resources>

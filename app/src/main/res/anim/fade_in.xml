@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:duration="500">
+
+    <!-- accelerate_decelerate_interpolator 在动画开始与结束的地方速率改变比较慢，在中间的时候加速 -->
+    <alpha
+        android:fromAlpha="0"
+        android:interpolator="@android:anim/accelerate_decelerate_interpolator"
+        android:toAlpha="1.0" />
+</set>

@@ -7,13 +7,13 @@ import android.support.v4.app.Fragment
 import cn.chhd.news.contract.IPageView
 import com.blankj.utilcode.util.LogUtils
 import io.reactivex.subscribers.ResourceSubscriber
+import java.util.*
 
 /**
  * Created by 葱花滑蛋 on 2017/12/12.
  */
-open abstract class SimpleSubscriber<T> : ResourceSubscriber<T> {
+abstract class SimpleSubscriber<T> : ResourceSubscriber<T> {
 
-    private val mDelayMillis = 1000
     private var mStartTimeMillis: Long = 0
 
     private var mView: IPageView? = null
@@ -82,10 +82,10 @@ open abstract class SimpleSubscriber<T> : ResourceSubscriber<T> {
 
     private fun delayExcute(r: Runnable) {
         val timeDif = getTimeDif()
-        if (timeDif > mDelayMillis) {
+        if (timeDif > delayMillis()) {
             Handler().post(r)
         } else {
-            Handler().postDelayed({ Handler().post(r) }, mDelayMillis - timeDif)
+            Handler().postDelayed({ Handler().post(r) }, delayMillis() - timeDif)
         }
     }
 
@@ -108,5 +108,9 @@ open abstract class SimpleSubscriber<T> : ResourceSubscriber<T> {
 
     protected open fun isShowDialog(): Boolean {
         return false
+    }
+
+    protected open fun delayMillis(): Int {
+        return 1000
     }
 }

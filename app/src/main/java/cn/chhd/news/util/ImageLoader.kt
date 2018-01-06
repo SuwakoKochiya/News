@@ -1,5 +1,6 @@
 package cn.chhd.news.util
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.net.ConnectivityManager
@@ -17,69 +18,69 @@ import com.bumptech.glide.request.RequestOptions
 
 class ImageLoader private constructor() {
 
-    val configuration = ImageLoaderConfiguration()
+    val mConfiguration = ImageLoaderConfiguration()
 
-    private var activity: Activity? = null
-    private var fragment: Fragment? = null
-    private var model: Any? = null
-    private var isAnimation = true
-    private var placeholderId: Int = 0
-    private var errorId: Int = 0
+    private var mActivity: Activity? = null
+    private var mFragment: Fragment? = null
+    private var mModel: Any? = null
+    private var mIsAnimation = true
+    private var mPlaceholderId: Int = 0
+    private var mErrorId: Int = 0
 
     fun with(activity: Activity): ImageLoader {
-        this.activity = activity
+        this.mActivity = activity
         return this
     }
 
     fun with(fragment: Fragment): ImageLoader {
-        this.fragment = fragment
+        this.mFragment = fragment
         return this
     }
 
     fun load(model: Any?): ImageLoader {
-        this.model = model
+        this.mModel = model
         return this
     }
 
     fun dontAnimate(): ImageLoader {
-        this.isAnimation = false
+        this.mIsAnimation = false
         return this
     }
 
     fun placeholderId(placeholderId: Int): ImageLoader {
-        this.placeholderId = placeholderId
+        this.mPlaceholderId = placeholderId
         return this
     }
 
     fun errorId(errorId: Int): ImageLoader {
-        this.errorId = errorId
+        this.mErrorId = errorId
         return this
     }
 
     fun into(imageView: ImageView) {
 
         val requestManager = when {
-            fragment != null -> Glide.with(fragment!!)
-            activity != null -> Glide.with(activity!!)
+            mFragment != null -> Glide.with(mFragment!!)
+            mActivity != null -> Glide.with(mActivity!!)
             else -> Glide.with(imageView)
         }
 
-        val requestBuilder = requestManager.load(model)
+        val requestBuilder = requestManager.load(mModel)
 
-        if (placeholderId != 0) {
-            requestBuilder.apply(RequestOptions.placeholderOf(placeholderId))
-        } else if (configuration.getPlaceholderId() != 0) {
-            requestBuilder.apply(RequestOptions.placeholderOf(configuration!!.getPlaceholderId()))
+        if (mPlaceholderId != 0) {
+            requestBuilder.apply(RequestOptions.placeholderOf(mPlaceholderId))
+        } else if (mConfiguration.getPlaceholderId() != 0) {
+            requestBuilder.apply(RequestOptions.placeholderOf(mConfiguration.getPlaceholderId()))
         }
-        if (errorId != 0) {
-            requestBuilder.apply(RequestOptions.errorOf(errorId))
-        } else if (configuration.getErrorId() != 0) {
-            requestBuilder.apply(RequestOptions.errorOf(configuration!!.getErrorId()))
+        if (mErrorId != 0) {
+            requestBuilder.apply(RequestOptions.errorOf(mErrorId))
+        } else if (mConfiguration.getErrorId() != 0) {
+            requestBuilder.apply(RequestOptions.errorOf(mConfiguration.getErrorId()))
         }
-        if (configuration!!.isAnimation() && isAnimation) {
+        if (mConfiguration.isAnimation() && mIsAnimation) {
             requestBuilder.transition(DrawableTransitionOptions.withCrossFade())
         }
-        if (configuration!!.isNoPhoto() && isMobileConnected(imageView.context)) {
+        if (mConfiguration.isNoPhoto() && isMobileConnected(imageView.context)) {
             requestBuilder.apply(RequestOptions().onlyRetrieveFromCache(true))
         }
 
@@ -89,10 +90,10 @@ class ImageLoader private constructor() {
     }
 
     private fun reset() {
-        model = null
-        placeholderId = 0
-        errorId = 0
-        isAnimation = true
+        mModel = null
+        mPlaceholderId = 0
+        mErrorId = 0
+        mIsAnimation = true
     }
 
     private fun isMobileConnected(context: Context?): Boolean {
@@ -107,6 +108,7 @@ class ImageLoader private constructor() {
 
     companion object {
 
+        @SuppressLint("StaticFieldLeak")
         val instance = ImageLoader()
     }
 }

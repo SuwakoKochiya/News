@@ -9,6 +9,4 @@ import javax.inject.Scope
  * Created by 葱花滑蛋 on 2017/12/7.
  */
 @Scope
-@Documented
-@Retention(RetentionPolicy.RUNTIME)
 annotation class AppScope

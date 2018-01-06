@@ -3,6 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/color_background"
+    android:paddingTop="@dimen/status_bar_height"
     tools:context="cn.chhd.news.ui.fragment.EmptyFragment">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="暂无更多内容"
+        android:textColor="@color/color_text_first"
+        android:textSize="@dimen/text_size_normal" />
 </LinearLayout>

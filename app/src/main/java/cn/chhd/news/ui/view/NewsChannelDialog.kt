@@ -1,6 +1,7 @@
 package cn.chhd.news.ui.view
 
 import android.content.DialogInterface
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.support.v4.app.FragmentManager
@@ -17,6 +18,7 @@ import cn.chhd.news.ui.ItemDragHelperCallback
 import cn.chhd.news.ui.adapter.NewsChannelAdapter
 import cn.chhd.news.ui.listener.OnNewsChannelChangeListener
 import cn.chhd.news.ui.listener.OnNewsChannelDragListener
+import cn.chhd.news.util.SettingsUtils
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.SPUtils
 import com.chad.library.adapter.base.BaseViewHolder
@@ -41,7 +43,7 @@ class NewsChannelDialog : DialogFragment(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(DialogFragment.STYLE_NORMAL, R.style.TransparentStatusBar)
+        setStyle(DialogFragment.STYLE_NORMAL, SettingsUtils.getThemeColor())
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,

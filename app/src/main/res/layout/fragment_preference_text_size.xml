@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_background"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/text_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/color_background_deep"
+        android:gravity="center"
+        android:textSize="@dimen/text_size_normal"
+        android:text="调节仅在文章列表生效"
+        android:textColor="@color/color_text_first" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/color_background"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/padding_normal"
+        android:paddingRight="@dimen/padding_normal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="小"
+            android:textColor="@color/color_text_first"
+            android:textSize="@dimen/text_size_small" />
+
+        <android.support.v7.widget.AppCompatSeekBar
+            android:id="@+id/seek_bak"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dp_40"
+            android:layout_marginRight="@dimen/dp_40"
+            android:layout_weight="1"
+            android:max="4"
+            android:progress="2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="大"
+            android:textColor="@color/color_text_first"
+            android:textSize="@dimen/text_size_big" />
+    </LinearLayout>
+</LinearLayout>

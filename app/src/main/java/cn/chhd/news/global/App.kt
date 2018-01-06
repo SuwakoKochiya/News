@@ -2,6 +2,8 @@ package cn.chhd.news.global
 
 import android.support.v7.app.AppCompatDelegate
 import cn.chhd.mylibrary.global.BaseApplication
+import cn.chhd.news.BuildConfig
+import cn.chhd.news.R
 import cn.chhd.news.di.component.AppComponent
 import cn.chhd.news.di.component.DaggerAppComponent
 import cn.chhd.news.di.module.AppModule
@@ -11,6 +13,10 @@ import cn.chhd.news.util.SettingsUtils
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.Utils
 import com.facebook.stetho.Stetho
+import com.tencent.bugly.Bugly
+import com.tencent.bugly.beta.Beta
+import com.tencent.bugly.crashreport.CrashReport
+import java.util.*
 
 /**
  * Created by congh on 2017/11/26.
@@ -34,11 +40,77 @@ class App : BaseApplication() {
 
         Stetho.initializeWithDefaults(this)
 
-        val mode = if (SettingsUtils.isNightMode()) AppCompatDelegate.MODE_NIGHT_YES
-        else AppCompatDelegate.MODE_NIGHT_NO
-        AppCompatDelegate.setDefaultNightMode(mode)
+        ImageLoader.instance.mConfiguration.setNoPhoto(SettingsUtils.isNoPhoto())
 
-        ImageLoader.instance.configuration.setNoPhoto(SettingsUtils.isNoPhoto())
+        initNightMode()
+
+        if (!BuildConfig.DEBUG) {
+            initBugly()
+        }
+    }
+
+    private fun initBugly() {
+
+        CrashReport.setIsDevelopmentDevice(this, BuildConfig.DEBUG)
+
+        // 设置状态栏小图标，smallIconId为项目中的图片资源id;
+        Beta.smallIconId = R.drawable.ic_cloud_download_white_18dp
+        // 设置通知栏大图标，largeIconId为项目中的图片资源；
+        Beta.largeIconId = R.mipmap.ic_launcher
+
+        /*
+         * true表示初始化时自动检查升级
+         * false表示不会自动检查升级，需要手动调用Beta.checkUpgrade()方法
+         */
+        Beta.autoCheckUpgrade = false
+
+        /*参数1：上下文对象
+
+        参数2：注册时申请的APPID
+
+        参数3：是否开启debug模式，true表示打开debug模式，false表示关闭调试模式
+
+        提示：已经接入Bugly用户改用上面的初始化方法,不影响原有的crash上报功能; init方法会自动检测更新，不需要再手动调用Beta.checkUpgrade(), 如需增加自动检查时机可以使用Beta.checkUpgrade(false,false);
+
+        参数1：isManual 用户手动点击检查，非用户点击操作请传false
+
+        参数2：isSilence 是否显示弹窗等交互，[true:没有弹窗和toast] [false:有弹窗或toast]*/
+        Bugly.init(getApplication(), "762d5981d0", BuildConfig.DEBUG)
+    }
+
+    public fun initNightMode() {
+        if (SettingsUtils.isAutoNightMode()) {
+            val currentTimeMillis = System.currentTimeMillis()
+            if (currentTimeMillis in getDayMillis()..(getNightMillis() - 1)) { // 日间模式
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            } else { // 夜间模式
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            }
+        } else {
+            val mode = if (SettingsUtils.isNightMode()) AppCompatDelegate.MODE_NIGHT_YES
+            else AppCompatDelegate.MODE_NIGHT_NO
+            AppCompatDelegate.setDefaultNightMode(mode)
+        }
+    }
+
+    private fun getNightMillis(): Long {
+        val nightTimes = SettingsUtils.getAutoNightTime()
+        val cal = Calendar.getInstance()
+        cal.set(Calendar.HOUR_OF_DAY, nightTimes[0])
+        cal.set(Calendar.MINUTE, nightTimes[1])
+        cal.set(Calendar.SECOND, 0)
+        cal.set(Calendar.MILLISECOND, 0)
+        return cal.timeInMillis
+    }
+
+    private fun getDayMillis(): Long {
+        val dayTimes = SettingsUtils.getAutoDayTime()
+        val cal = Calendar.getInstance()
+        cal.set(Calendar.HOUR_OF_DAY, dayTimes[0])
+        cal.set(Calendar.MINUTE, dayTimes[1])
+        cal.set(Calendar.SECOND, 0)
+        cal.set(Calendar.MILLISECOND, 0)
+        return cal.timeInMillis
     }
 
     private fun initLog() {

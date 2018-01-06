@@ -1,16 +1,32 @@
 <resources>
-
     <!-- Base application theme. -->
-    <style name="TransparentStatusBar" parent="@style/AppTheme">
-        <!-- true：布局扩展至系统状态栏，配合android:fitsSystemWindows="true"，根布局上加状态栏的padding -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+         true：布局扩展至系统状态栏，配合android:fitsSystemWindows="true"，根布局上加状态栏的padding
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">false</item> <!-- 导航栏 true：透明 -->
+
+        <!--&lt;!&ndash; These values must be set for this mechanism to work &ndash;&gt;-->
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+
+        <item name="md_dark_theme">@bool/md_dark_theme</item>
     </style>
 
-    <style name="DrawStatusBarTheme" parent="@style/AppTheme">
-        <item name="android:statusBarColor">@android:color/transparent</item> <!-- 状态栏透明 -->
-        <!-- 在API21和以上，配合android:fitsSystemWindows="true"使用，如DrawerLayout延伸至状态栏 -->
-        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-    </style>
+    <style name="MainTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
 
+        true：布局扩展至系统状态栏，配合android:fitsSystemWindows="true"，根布局上加状态栏的padding
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">false</item> <!-- 导航栏 true：透明 -->
+
+        <item name="md_dark_theme">@bool/md_dark_theme</item>
+    </style>
 </resources>

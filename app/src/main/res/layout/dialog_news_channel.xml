@@ -28,8 +28,8 @@
             android:clipToPadding="false"
             android:nestedScrollingEnabled="false"
             android:paddingBottom="@dimen/padding_normal"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingLeft="@dimen/padding_normal"
+            android:paddingRight="@dimen/padding_normal"
             android:visibility="visible" />
     </FrameLayout>
 </LinearLayout>

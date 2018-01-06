@@ -21,8 +21,7 @@ class EmptyFragment : Fragment() {
     companion object {
 
         fun newInstance(): EmptyFragment {
-            val fragment = EmptyFragment()
-            return fragment
+            return EmptyFragment()
         }
     }
 }

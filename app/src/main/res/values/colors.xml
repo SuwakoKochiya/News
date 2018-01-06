@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#F44336</color>
-    <color name="colorPrimaryDark">#D32F2F</color>
-    <color name="colorAccent">#D50000</color>
+    <color name="colorPrimary">@color/material_red_500</color>
+    <color name="colorPrimaryDark">@color/material_red_700</color>
+    <color name="colorAccent">@color/material_red_a700</color>
 
     <color name="color_text_first">#333333</color>
     <color name="color_text_second">#666666</color>
@@ -11,11 +11,13 @@
 
     <color name="color_line">#E7E7E7</color>
     <color name="color_image">#EDEDED</color>
+    <color name="color_preference_category">#EFEFEF</color>
 
-    <color name="color_background">#FFFFFF</color>
-    <color name="color_background_light">#FFFFFF</color>
-    <color name="color_background_deep">#FFFFFF</color>
-    <color name="color_primary">#F44336</color>
+    <color name="color_background">#fafafa</color>
+    <color name="color_background_light">#fafafa</color>
+    <color name="color_background_deep">#f2f2f2</color>
 
     <color name="color_gray">#F4F2F6</color>
+
+    <!-- 分割线 以下与 color-night 不同步-->
 </resources>

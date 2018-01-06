@@ -6,44 +6,44 @@ package cn.chhd.news.util
 
 class ImageLoaderConfiguration {
 
-    private var placeholderId: Int = 0
-    private var errorId: Int = 0
-    private var isAnimation: Boolean = true
-    private var isNoPhoto: Boolean = false
+    private var mPlaceholderId: Int = 0
+    private var mErrorId: Int = 0
+    private var mIsAnimation: Boolean = true
+    private var mIsNoPhoto: Boolean = false
 
     fun setPlaceholderId(placeholderId: Int): ImageLoaderConfiguration {
-        this.placeholderId = placeholderId
+        this.mPlaceholderId = placeholderId
         return this
     }
 
     fun setErrorId(errorId: Int): ImageLoaderConfiguration {
-        this.errorId = errorId
+        this.mErrorId = errorId
         return this
     }
 
     fun setAnimation(animation: Boolean): ImageLoaderConfiguration {
-        isAnimation = animation
+        mIsAnimation = animation
         return this
     }
 
     fun setNoPhoto(noPhoto: Boolean): ImageLoaderConfiguration {
-        isNoPhoto = noPhoto
+        mIsNoPhoto = noPhoto
         return this
     }
 
     fun getPlaceholderId(): Int {
-        return placeholderId
+        return mPlaceholderId
     }
 
     fun getErrorId(): Int {
-        return errorId
+        return mErrorId
     }
 
     fun isAnimation(): Boolean {
-        return isAnimation
+        return mIsAnimation
     }
 
     fun isNoPhoto(): Boolean {
-        return isNoPhoto
+        return mIsNoPhoto
     }
 }

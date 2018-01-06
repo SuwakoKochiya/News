@@ -11,11 +11,11 @@
 
     <color name="color_line">#28292E</color>
     <color name="color_image">#2A2B2F</color>
+    <color name="color_preference_category">#1A191E</color>
 
     <color name="color_background">#1E1F24</color>
     <color name="color_background_light">#28292E</color>
     <color name="color_background_deep">#1A191E</color>
-    <color name="color_primary">#989898</color>
 
     <color name="color_gray">#1A191E</color>
 </resources>

@@ -1,25 +1,30 @@
 package cn.chhd.news.ui.view
 
-import android.annotation.SuppressLint
-import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.graphics.drawable.Drawable
+import android.os.Bundle
 import android.preference.ListPreference
+import android.support.v4.content.ContextCompat
+import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.CheckedTextView
 import android.widget.ImageView
 import android.widget.TextView
 import cn.chhd.news.R
+import cn.chhd.news.ui.listener.OnItemClickListener
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.prefs.MaterialListPreference
+import com.blankj.utilcode.util.LogUtils
 import java.util.ArrayList
 
 /**
  * Created by 葱花滑蛋 on 2017/12/19.
  */
-class IconListPreference(context: Context, attrs: AttributeSet) : ListPreference(context, attrs) {
+class IconListPreference(context: Context, attrs: AttributeSet) : MaterialListPreference(context, attrs) {
 
     private val drawableList = ArrayList<Drawable>()
 
@@ -28,10 +33,10 @@ class IconListPreference(context: Context, attrs: AttributeSet) : ListPreference
         val drawables = typeArray.getTextArray(R.styleable.IconListPreference_app_icons)
         drawables
                 .map { context.resources.getIdentifier(it.toString(), "mipmap", context.packageName) }
-                .mapTo(drawableList) { context.resources.getDrawable(it) }
+                .mapTo(drawableList) { ContextCompat.getDrawable(context,it) }
         typeArray.recycle()
 
-        widgetLayoutResource = R.layout.preference_icon
+        widgetLayoutResource = R.layout.widget_frame_icon
     }
 
     override fun onBindView(view: View?) {
@@ -41,35 +46,4 @@ class IconListPreference(context: Context, attrs: AttributeSet) : ListPreference
         (view?.findViewById<ImageView>(R.id.iv_icon) as ImageView).setImageDrawable(drawable)
     }
 
-    override fun onPrepareDialogBuilder(builder: AlertDialog.Builder?) {
-        builder?.setAdapter(createListAdapter(), this)
-        super.onPrepareDialogBuilder(builder)
-    }
-
-    private fun createListAdapter(): IconAdapter {
-        val selectedIndex = findIndexOfValue(value)
-        return IconAdapter(context, R.layout.item_list_pref_icon, entries, selectedIndex, drawableList)
-    }
-
-    class IconAdapter(context: Context,
-                      resourceId: Int,
-                      stringList: Array<CharSequence>,
-                      private val selectedIndex: Int,
-                      private val drawableList: ArrayList<Drawable>)
-        : ArrayAdapter<CharSequence>(context, resourceId, stringList) {
-
-        @SuppressLint("ViewHolder")
-        override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-            val view = LayoutInflater.from(context)
-                    .inflate(R.layout.item_list_pref_icon, parent, false)
-
-            val tvEntry = view.findViewById<CheckedTextView>(R.id.tv_entry)
-            tvEntry.text = getItem(position)
-            tvEntry.isChecked = selectedIndex == position
-
-            val ivIcon = view.findViewById<ImageView>(R.id.iv_icon)
-            ivIcon.setImageDrawable(drawableList[position])
-            return view
-        }
-    }
 }

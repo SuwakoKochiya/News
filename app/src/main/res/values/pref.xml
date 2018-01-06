@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="pref_night_mode">pref_night_mode</string>
     <string name="pref_no_photo">pref_no_photo</string>
+    <string name="pref_slide_return">pref_slide_return</string>
+    <string name="pref_text_size">pref_text_size</string>
+    <string name="pref_night_mode">pref_night_mode</string>
+    <string name="pref_auto_night_mode">pref_auto_night_mode</string>
+    <string name="pref_auto_night_mode_switch">pref_auto_night_mode_switch</string>
+    <string name="pref_auto_night_mode_night">pref_auto_night_mode_night</string>
+    <string name="pref_auto_night_mode_day">pref_auto_night_mode_day</string>
+    <string name="pref_cache_size">pref_cache_size</string>
 
+    <string name="pref_app_icon">pref_app_icon</string>
+    <string name="pref_theme_color">pref_theme_color</string>
+    <string name="pref_navigation_bar">pref_navigation_bar</string>
+
+    <string name="pref_license">pref_license</string>
+    <string name="pref_upgrade">pref_upgrade</string>
 </resources>

@@ -58,6 +58,9 @@ class NewsPresenter
                 view.showNewsChannelList(list)
             }
 
+            override fun delayMillis(): Int {
+                return 0
+            }
         }
     }
 

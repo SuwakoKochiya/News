@@ -37,6 +37,6 @@
         android:paddingRight="8dp"
         android:paddingTop="3dp"
         android:text="编辑"
-        android:textColor="@color/colorAccent"
+        android:textColor="?attr/colorAccent"
         android:textSize="@dimen/text_size_small" />
 </LinearLayout>

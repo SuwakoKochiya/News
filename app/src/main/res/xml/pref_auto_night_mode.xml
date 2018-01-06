@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <SwitchPreference
+        android:key="@string/pref_auto_night_mode_switch"
+        android:layout="@layout/preference"
+        android:title="开启" />
+
+    <PreferenceCategory
+        android:layout="@layout/preference_category"
+        android:title="切换的时间">
+
+        <Preference
+            android:key="@string/pref_auto_night_mode_night"
+            android:layout="@layout/preference"
+            android:summary="17:00"
+            android:title="夜间模式开始时间" />
+
+        <Preference
+            android:key="@string/pref_auto_night_mode_day"
+            android:layout="@layout/preference"
+            android:summary="07:00"
+            android:title="日间模式开始时间" />
+    </PreferenceCategory>
+</PreferenceScreen>

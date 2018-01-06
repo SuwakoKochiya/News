@@ -2,6 +2,7 @@
 <set xmlns:android="http://schemas.android.com/apk/res/android"
     android:duration="300">
 
+    <!-- accelerate_decelerate_interpolator 在动画开始与结束的地方速率改变比较慢，在中间的时候加速 -->
     <translate
         android:fromYDelta="0.0"
         android:interpolator="@android:anim/accelerate_decelerate_interpolator"

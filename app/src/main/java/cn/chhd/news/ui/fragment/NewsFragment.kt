@@ -17,13 +17,11 @@ import cn.chhd.news.contract.NewsContract
 import cn.chhd.news.di.component.DaggerNewsComponent
 import cn.chhd.news.di.module.NewsModule
 import cn.chhd.news.global.App
-import cn.chhd.news.global.Constant.Companion.KEY_ENABLE_NEWS_CHANNEL
-import cn.chhd.news.global.Constant.Companion.KEY_UNENABLE_NEWS_CHANNEL
+import cn.chhd.news.global.Constant
 import cn.chhd.news.presenter.NewsPresenter
 import cn.chhd.news.ui.fragment.base.BaseFragment
 import cn.chhd.news.ui.listener.OnNewsChannelChangeListener
 import cn.chhd.news.ui.view.NewsChannelDialog
-import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.SPUtils
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -54,8 +52,8 @@ class NewsFragment : BaseFragment(), NewsContract.View, View.OnClickListener {
                 .newsModule(NewsModule(this))
                 .build().inject(this)
 
-        var enableJson = SPUtils.getInstance().getString(KEY_ENABLE_NEWS_CHANNEL)
-        var unEnableJson = SPUtils.getInstance().getString(KEY_ENABLE_NEWS_CHANNEL)
+        var enableJson = SPUtils.getInstance().getString(Constant.KEY_ENABLE_NEWS_CHANNEL)
+        var unEnableJson = SPUtils.getInstance().getString(Constant.KEY_ENABLE_NEWS_CHANNEL)
         if (TextUtils.isEmpty(enableJson) && TextUtils.isEmpty(unEnableJson)) {
             mPresenter.requestNewsChannelList()
         } else {
@@ -79,11 +77,11 @@ class NewsFragment : BaseFragment(), NewsContract.View, View.OnClickListener {
     }
 
     private fun initNewsChannelDatas() {
-        var json = SPUtils.getInstance().getString(KEY_ENABLE_NEWS_CHANNEL)
+        var json = SPUtils.getInstance().getString(Constant.KEY_ENABLE_NEWS_CHANNEL)
         val type = object : TypeToken<ArrayList<NewsChannel>>() {}.type
         if (!TextUtils.isEmpty(json))
             mEnableList = mGson.fromJson<ArrayList<NewsChannel>>(json, type)
-        json = SPUtils.getInstance().getString(KEY_UNENABLE_NEWS_CHANNEL)
+        json = SPUtils.getInstance().getString(Constant.KEY_UNENABLE_NEWS_CHANNEL)
         if (!TextUtils.isEmpty(json))
             mUnEnableList = mGson.fromJson<ArrayList<NewsChannel>>(json, type)
 
@@ -110,10 +108,9 @@ class NewsFragment : BaseFragment(), NewsContract.View, View.OnClickListener {
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         super.onCreateOptionsMenu(menu, inflater)
-
         inflater?.inflate(R.menu.main, menu)
         val menuItem = menu?.findItem(R.id.action_search)
-        val searchView = MenuItemCompat.getActionView(menuItem)
+        val searchView = menuItem?.actionView
         searchView?.setOnClickListener {
         }
     }
@@ -130,8 +127,8 @@ class NewsFragment : BaseFragment(), NewsContract.View, View.OnClickListener {
                     }
                     mAdapter.notifyDataSetChanged()
 
-                    SPUtils.getInstance().put(KEY_ENABLE_NEWS_CHANNEL, mGson.toJson(mEnableList))
-                    SPUtils.getInstance().put(KEY_UNENABLE_NEWS_CHANNEL, mGson.toJson(mUnEnableList))
+                    SPUtils.getInstance().put(Constant.KEY_ENABLE_NEWS_CHANNEL, mGson.toJson(mEnableList))
+                    SPUtils.getInstance().put(Constant.KEY_UNENABLE_NEWS_CHANNEL, mGson.toJson(mUnEnableList))
                 }
             }
         }

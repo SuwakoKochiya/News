@@ -1,7 +1,6 @@
 package cn.chhd.news.ui.fragment
 
 
-import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
@@ -14,14 +13,13 @@ import cn.chhd.news.contract.NewsArticleContract
 import cn.chhd.news.di.component.DaggerNewsArticleComponent
 import cn.chhd.news.di.module.NewsArticleModule
 import cn.chhd.news.global.App
-import cn.chhd.news.global.Constant.Companion.SWIPE_REFRESH_LAYOUT_COLORS
+import cn.chhd.news.global.Constant
 import cn.chhd.news.presenter.NewsArticlePresenter
 import cn.chhd.news.ui.adapter.NewsArticleAdapter
 import cn.chhd.news.ui.fragment.base.ProgressFragment
 import com.blankj.utilcode.util.LogUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
 import kotlinx.android.synthetic.main.fragment_news_article.*
-import java.util.function.Predicate
 import javax.inject.Inject
 
 
@@ -53,7 +51,7 @@ class NewsArticleFragment : ProgressFragment(), NewsArticleContract.View {
         super.onViewCreated(view, savedInstanceState)
 
         swipe_refresh_layout.setProgressBackgroundColorSchemeResource(R.color.color_background_light)
-        swipe_refresh_layout.setColorSchemeResources(*SWIPE_REFRESH_LAYOUT_COLORS)
+        swipe_refresh_layout.setColorSchemeResources(*Constant.SWIPE_REFRESH_LAYOUT_COLORS)
         swipe_refresh_layout.setOnRefreshListener(onRefreshListener)
 
         mAdapter = NewsArticleAdapter(this, mNewsArticleList)
@@ -75,7 +73,7 @@ class NewsArticleFragment : ProgressFragment(), NewsArticleContract.View {
 //        refresh()
     }
 
-    private val onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
+    private val onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, _, position ->
         if (adapter.getItemViewType(position) == NewsArticle.ITEM_REFRESH) {
             refresh()
         }
@@ -90,6 +88,11 @@ class NewsArticleFragment : ProgressFragment(), NewsArticleContract.View {
             swipe_refresh_layout.isRefreshing = true
             onRefreshListener.onRefresh()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mAdapter.notifyDataSetChanged()
     }
 
     override fun showNewsArticlelList(list: ArrayList<NewsArticle>) {

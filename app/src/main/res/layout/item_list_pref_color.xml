@@ -23,5 +23,7 @@
         android:layout_marginLeft="@dimen/margin_normal"
         android:checkMark="?android:attr/listChoiceIndicatorSingle"
         android:gravity="center_vertical"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textColor="@color/color_text_second"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        tools:text="方形" />
 </LinearLayout>

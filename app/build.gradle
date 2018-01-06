@@ -38,6 +38,18 @@ kapt {
     generateStubs = true
 }
 
+// 解决支持库版本兼容问题 (http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2017/0910/8491.html)
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        def requested = details.requested
+        if (requested.group == 'com.android.support') {
+            if (!requested.name.startsWith("multidex")) {
+                details.useVersion rootProject.ext.supportLibVersion
+            }
+        }
+    }
+}
+
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
@@ -46,19 +58,38 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation project(':lib-my')
+    // RxAndroid (https://github.com/ReactiveX/RxAndroid)
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
     implementation 'io.reactivex.rxjava2:rxjava:2.1.7'
+    // Retrofit (https://github.com/square/retrofit)
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
     implementation 'com.squareup.retrofit2:converter-scalars:2.3.0'
+    // OkHttp (https://github.com/square/okhttp)
     implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
+    // Stetho (https://github.com/facebook/stetho)
     implementation 'com.facebook.stetho:stetho-okhttp3:1.5.0'
+    // Dagger 2 (https://github.com/google/dagger)
     implementation 'com.google.dagger:dagger:2.13'
     kapt 'com.google.dagger:dagger-compiler:2.13'
+    // Glide (https://github.com/bumptech/glide)
     implementation 'com.github.bumptech.glide:glide:4.1.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.1.1'
+    // RxBinding (https://github.com/JakeWharton/RxBinding)
+    implementation 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
+    // google-gson (https://github.com/google/gson)
     implementation 'com.google.code.gson:gson:2.8.2'
+    // BaseRecyclerViewAdapterHelper (https://github.com/CymChad/BaseRecyclerViewAdapterHelper)
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
+    // AndroidUtilCode (https://github.com/Blankj/AndroidUtilCode)
     implementation 'com.blankj:utilcode:1.9.9'
+    // Slidr (https://github.com/r0adkll/Slidr)
+    implementation 'com.r0adkll:slidableactivity:2.0.6'
+    // Material Dialogs (https://github.com/afollestad/material-dialogs)
+    implementation 'com.afollestad.material-dialogs:commons:0.9.4.3'
+    // LicensesDialog (https://github.com/PSDev/LicensesDialog)
+    implementation 'de.psdev.licensesdialog:licensesdialog:1.8.2'
+    // Bugly (https://bugly.qq.com/v2/)
+    implementation 'com.tencent.bugly:crashreport_upgrade:1.3.4'
 }
