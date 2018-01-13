@@ -3,6 +3,7 @@ package cn.chhd.news.model
 import cn.chhd.news.bean.ResponseData
 import cn.chhd.news.contract.NewsContract
 import cn.chhd.news.http.ApiService
+import cn.chhd.news.http.RxHttpReponseCompat
 import cn.chhd.news.model.base.BaseModel
 import io.reactivex.Flowable
 import io.reactivex.Observable
@@ -14,8 +15,9 @@ import io.reactivex.schedulers.Schedulers
  */
 class NewsModel(apiService: ApiService) : BaseModel(apiService), NewsContract.Model {
 
-    override fun getNewsChannelList(appkey: String): Flowable<ResponseData<ArrayList<String>>> {
+    override fun getNewsChannelList(appkey: String): Flowable<ArrayList<String>> {
         return apiService.getNewsChannelList(appkey)
+                .compose(RxHttpReponseCompat.transform())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
     }

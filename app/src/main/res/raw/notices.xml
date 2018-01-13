@@ -76,4 +76,22 @@
         <copyright>Copyright (c) 2014 Drew Heavner</copyright>
         <license>Apache Software License 2.0</license>
     </notice>
+    <notice>
+        <name>CircleImageView</name>
+        <url>https://github.com/hdodenhof/CircleImageView</url>
+        <copyright>Copyright (c) 2014 Drew Heavner</copyright>
+        <license>Apache Software License 2.0</license>
+    </notice>
+    <notice>
+        <name>RxLifecycle</name>
+        <url>https://github.com/trello/RxLifecycle</url>
+        <copyright>Copyright (C) 2016 Trello</copyright>
+        <license>Apache Software License 2.0</license>
+    </notice>
+    <notice>
+        <name>FlexboxLayout</name>
+        <url>https://github.com/google/flexbox-layout</url>
+        <copyright></copyright>
+        <license>Apache Software License 2.0</license>
+    </notice>
 </notices>

@@ -1,29 +1,41 @@
 package cn.chhd.news.ui.activity.base
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.app.AppCompatDelegate
+import android.util.TypedValue
 import android.view.MenuItem
+import android.view.MotionEvent
+import android.view.inputmethod.InputMethodManager
 import cn.chhd.mylibrary.util.UiUtils
 import cn.chhd.news.R
+import cn.chhd.news.contract.IBaseView
 import cn.chhd.news.global.Constant
 import cn.chhd.news.util.SettingsUtils
 import com.r0adkll.slidr.Slidr
 import com.r0adkll.slidr.model.SlidrConfig
 import com.r0adkll.slidr.model.SlidrPosition
-import android.util.TypedValue
-import com.blankj.utilcode.util.LogUtils
+import com.trello.rxlifecycle2.LifecycleTransformer
+import com.trello.rxlifecycle2.android.ActivityEvent
+import com.trello.rxlifecycle2.android.FragmentEvent
+import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
+import android.opengl.ETC1.getWidth
+import android.opengl.ETC1.getHeight
+import android.view.View
+import android.widget.EditText
 
 
 /**
  * Created by congh on 2017/11/26.
  */
 
-open class BaseActivity : AppCompatActivity() {
+open class BaseActivity : RxAppCompatActivity(), IBaseView {
+
+    protected val mMenuItemIdDefault = 10
 
     companion object {
         private val mActivityList = ArrayList<Activity>()
@@ -48,9 +60,12 @@ open class BaseActivity : AppCompatActivity() {
         setNavigationBarColor()
     }
 
+    private var mIsDestroy = false
+
     override fun onDestroy() {
-        super.onDestroy()
         mActivityList.remove(this)
+        mIsDestroy = true
+        super.onDestroy()
     }
 
     fun setNavigationBarColor() {
@@ -66,9 +81,9 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     fun reCreateToAll() {
-        window.setWindowAnimations(R.style.WindowAnimationFadeInOut)
+        reStart()
+        mActivityList.remove(this)
         for (activity in mActivityList) {
-            LogUtils.i(activity)
             activity.recreate()
         }
     }
@@ -115,4 +130,40 @@ open class BaseActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+    override fun <T> bindToLifecycle(event: ActivityEvent): LifecycleTransformer<T>? {
+        return bindUntilEvent(event)
+    }
+
+    override fun <T> bindToLifecycle(event: FragmentEvent): LifecycleTransformer<T>? {
+        return null
+    }
+
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        if (ev?.action === MotionEvent.ACTION_DOWN) {
+            val v = currentFocus
+            if (isShouldHideKeyboard(v, ev) && isAutoHideKeyboard()) {
+                val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(v!!.windowToken, InputMethodManager.HIDE_NOT_ALWAYS
+                )
+            }
+        }
+        return super.dispatchTouchEvent(ev)
+    }
+
+    private fun isShouldHideKeyboard(v: View?, event: MotionEvent?): Boolean {
+        if (v != null && v is EditText && event != null) {
+            val l = intArrayOf(0, 0)
+            v.getLocationInWindow(l)
+            val left = l[0]
+            val top = l[1]
+            val bottom = top + v.getHeight()
+            val right = left + v.getWidth()
+            return !(event.x > left && event.x < right && event.y > top && event.y < bottom)
+        }
+        return false
+    }
+
+    open fun isAutoHideKeyboard(): Boolean {
+        return false
+    }
 }

@@ -9,25 +9,17 @@ import com.chad.library.adapter.base.entity.MultiItemEntity
 
 class NewsChannel : MultiItemEntity {
 
-    var title: String? = null
+    var title = ""
 
-    var channelName: String? = null
-    var channelId: String? = null
-    var isEnable: Boolean = false
-    var position: Int = 0
+    var channelName = ""
+    var channelId = ""
+    var isEnable = false
 
     constructor()
 
     constructor(title: String, isEnable: Boolean) {
         this.title = title
         this.isEnable = isEnable
-    }
-
-    constructor(channelName: String?, channelId: String?, isEnable: Boolean, position: Int) {
-        this.channelName = channelName
-        this.channelId = channelId
-        this.isEnable = isEnable
-        this.position = position
     }
 
     override fun getItemType(): Int {

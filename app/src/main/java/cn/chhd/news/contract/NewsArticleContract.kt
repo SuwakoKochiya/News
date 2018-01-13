@@ -18,9 +18,9 @@ interface NewsArticleContract {
 
     interface Model {
 
-        fun getNewsArticlelList(appkey: String,
-                                channel: String,
-                                num: Int,
-                                start: Int): Flowable<ResponseData<ListData<NewsArticle>>>
+        fun getNewsArticleList(appkey: String,
+                               channel: String,
+                               num: Int,
+                               start: Int): Flowable<ListData<NewsArticle>>
     }
 }

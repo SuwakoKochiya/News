@@ -6,7 +6,9 @@ package cn.chhd.news.bean
 
 class ListData<T> {
 
-    var channel: String? = null
-    var list: ArrayList<T>? = null
-    var num: String? = null
+    var channel = ""
+
+    var list = ArrayList<T>()
+
+    var num = ""
 }

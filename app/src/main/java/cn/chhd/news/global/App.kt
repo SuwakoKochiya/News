@@ -13,6 +13,7 @@ import cn.chhd.news.util.SettingsUtils
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.Utils
 import com.facebook.stetho.Stetho
+import com.mob.MobSDK
 import com.tencent.bugly.Bugly
 import com.tencent.bugly.beta.Beta
 import com.tencent.bugly.crashreport.CrashReport
@@ -44,13 +45,14 @@ class App : BaseApplication() {
 
         initNightMode()
 
-        if (!BuildConfig.DEBUG) {
-            initBugly()
-        }
+        initBugly()
+
+        MobSDK.init(this)
     }
 
     private fun initBugly() {
 
+        if (BuildConfig.DEBUG) CrashReport.closeCrashReport()
         CrashReport.setIsDevelopmentDevice(this, BuildConfig.DEBUG)
 
         // 设置状态栏小图标，smallIconId为项目中的图片资源id;
@@ -78,7 +80,7 @@ class App : BaseApplication() {
         Bugly.init(getApplication(), "762d5981d0", BuildConfig.DEBUG)
     }
 
-    public fun initNightMode() {
+    fun initNightMode() {
         if (SettingsUtils.isAutoNightMode()) {
             val currentTimeMillis = System.currentTimeMillis()
             if (currentTimeMillis in getDayMillis()..(getNightMillis() - 1)) { // 日间模式

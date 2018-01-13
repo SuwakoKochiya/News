@@ -14,18 +14,18 @@
         android:layout_gravity="bottom"
         android:text="我的频道"
         android:textColor="@color/color_text_first"
-        android:textSize="@dimen/text_size_big" />
+        android:textSize="@dimen/sp_16" />
 
     <TextView
         android:id="@+id/tv_hint_click"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:layout_marginLeft="@dimen/margin_small"
+        android:layout_marginLeft="@dimen/dp_8"
         android:layout_weight="1"
         android:text="点击进入频道"
         android:textColor="@color/color_text_second"
-        android:textSize="@dimen/text_size_small" />
+        android:textSize="@dimen/sp_12" />
 
     <TextView
         android:id="@+id/tv_edit"
@@ -38,5 +38,5 @@
         android:paddingTop="3dp"
         android:text="编辑"
         android:textColor="?attr/colorAccent"
-        android:textSize="@dimen/text_size_small" />
+        android:textSize="@dimen/sp_12" />
 </LinearLayout>

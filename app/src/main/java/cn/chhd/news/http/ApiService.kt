@@ -1,8 +1,6 @@
 package cn.chhd.news.http
 
-import cn.chhd.news.bean.ListData
-import cn.chhd.news.bean.NewsArticle
-import cn.chhd.news.bean.ResponseData
+import cn.chhd.news.bean.*
 import io.reactivex.Flowable
 import io.reactivex.Observable
 import retrofit2.http.GET
@@ -14,12 +12,30 @@ import retrofit2.http.Query
 interface ApiService {
 
     @GET("news/channel")
-    fun getNewsChannelList(@Query("appkey") appkey: String): Flowable<ResponseData<ArrayList<String>>>
+    fun getNewsChannelList(@Query("appkey") appkey: String)
+            : Flowable<ResponseData<ArrayList<String>>>
 
 
     @GET("news/get")
-    fun getNewsArticlelList(@Query("appkey") appkey: String,
-                            @Query("channel") channel: String,
-                            @Query("num") num: Int,
-                            @Query("start") start: Int): Flowable<ResponseData<ListData<NewsArticle>>>
+    fun getNewsArticleList(@Query("appkey") appkey: String,
+                           @Query("channel") channel: String,
+                           @Query("num") num: Int,
+                           @Query("start") start: Int)
+            : Flowable<ResponseData<ListData<NewsArticle>>>
+
+    @GET("news/search")
+    fun getSearchList(@Query("appkey") appkey: String,
+                      @Query("keyword") keyword: String)
+            : Flowable<ResponseData<SearchData<NewsArticle>>>
+
+    @GET("weixinarticle/channel")
+    fun getWechatChannelList(@Query("appkey") appkey: String)
+            : Flowable<ResponseData<MutableList<WechatChannel>>>
+
+    @GET("weixinarticle/get")
+    fun getWechatArticleList(@Query("appkey") appkey: String,
+                             @Query("channelid") id: String,
+                             @Query("num") num: Int,
+                             @Query("start") start: Int)
+            : Flowable<ResponseData<ListData<WechatArticle>>>
 }

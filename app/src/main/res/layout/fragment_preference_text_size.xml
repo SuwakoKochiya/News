@@ -12,7 +12,7 @@
         android:layout_weight="1"
         android:background="@color/color_background_deep"
         android:gravity="center"
-        android:textSize="@dimen/text_size_normal"
+        android:textSize="@dimen/sp_14"
         android:text="调节仅在文章列表生效"
         android:textColor="@color/color_text_first" />
 
@@ -22,15 +22,15 @@
         android:background="@color/color_background"
         android:gravity="center"
         android:orientation="horizontal"
-        android:paddingLeft="@dimen/padding_normal"
-        android:paddingRight="@dimen/padding_normal">
+        android:paddingLeft="@dimen/dp_16"
+        android:paddingRight="@dimen/dp_16">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="小"
             android:textColor="@color/color_text_first"
-            android:textSize="@dimen/text_size_small" />
+            android:textSize="@dimen/sp_12" />
 
         <android.support.v7.widget.AppCompatSeekBar
             android:id="@+id/seek_bak"
@@ -47,6 +47,6 @@
             android:layout_height="wrap_content"
             android:text="大"
             android:textColor="@color/color_text_first"
-            android:textSize="@dimen/text_size_big" />
+            android:textSize="@dimen/sp_16" />
     </LinearLayout>
 </LinearLayout>

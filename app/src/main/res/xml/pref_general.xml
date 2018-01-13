@@ -50,7 +50,6 @@
             android:entryValues="@array/app_icon_values"
             android:key="@string/pref_app_icon"
             android:layout="@layout/preference"
-            android:summary="重启App生效"
             android:title="更换图标"
             app:app_icons="@array/app_icons" />
 

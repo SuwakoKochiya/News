@@ -2,14 +2,15 @@ package cn.chhd.news.ui.fragment
 
 
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.view.MenuItemCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.view.*
+import android.widget.EditText
 import cn.chhd.mylibrary.ui.adapter.FragmentAdapter
 import cn.chhd.news.R
 import cn.chhd.news.bean.NewsChannel
@@ -19,7 +20,9 @@ import cn.chhd.news.di.module.NewsModule
 import cn.chhd.news.global.App
 import cn.chhd.news.global.Constant
 import cn.chhd.news.presenter.NewsPresenter
+import cn.chhd.news.ui.activity.SearchActivity
 import cn.chhd.news.ui.fragment.base.BaseFragment
+import cn.chhd.news.ui.fragment.base.ProgressFragment
 import cn.chhd.news.ui.listener.OnNewsChannelChangeListener
 import cn.chhd.news.ui.view.NewsChannelDialog
 import com.blankj.utilcode.util.SPUtils
@@ -28,7 +31,14 @@ import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.fragment_news.*
 import javax.inject.Inject
 
-class NewsFragment : BaseFragment(), NewsContract.View, View.OnClickListener {
+class NewsFragment : ProgressFragment(), NewsContract.View, View.OnClickListener {
+
+    companion object {
+
+        fun newInstance(): NewsFragment {
+            return NewsFragment()
+        }
+    }
 
     private val mFragmentList = ArrayList<Fragment>()
     private lateinit var mAdapter: FragmentAdapter
@@ -39,21 +49,18 @@ class NewsFragment : BaseFragment(), NewsContract.View, View.OnClickListener {
     @Inject
     lateinit var mPresenter: NewsPresenter
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        return inflater!!.inflate(R.layout.fragment_news, container, false)
-    }
-
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        initView()
 
         DaggerNewsComponent.builder()
                 .appComponent(App.mInstance.mComponent)
                 .newsModule(NewsModule(this))
                 .build().inject(this)
 
-        var enableJson = SPUtils.getInstance().getString(Constant.KEY_ENABLE_NEWS_CHANNEL)
-        var unEnableJson = SPUtils.getInstance().getString(Constant.KEY_ENABLE_NEWS_CHANNEL)
+        val enableJson = SPUtils.getInstance().getString(Constant.KEY_ENABLE_NEWS_CHANNEL)
+        val unEnableJson = SPUtils.getInstance().getString(Constant.KEY_ENABLE_NEWS_CHANNEL)
         if (TextUtils.isEmpty(enableJson) && TextUtils.isEmpty(unEnableJson)) {
             mPresenter.requestNewsChannelList()
         } else {
@@ -61,19 +68,30 @@ class NewsFragment : BaseFragment(), NewsContract.View, View.OnClickListener {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        mPresenter.onDestroy()
+    override fun showPageComplete() {
+
+    }
+
+    override fun getContentResId(): Int {
+        return R.layout.fragment_news
+    }
+
+    override fun retry() {
+        mPresenter.requestNewsChannelList()
     }
 
     private fun initView() {
         tab_layout.setupWithViewPager(view_pager)
-
         iv_add.setOnClickListener(this)
-
-        mEnableList.mapTo(mFragmentList) { NewsArticleFragment.newInstance(it.channelName!!) }
         mAdapter = FragmentAdapter(childFragmentManager, mFragmentList)
         view_pager.adapter = mAdapter
+        view_pager.offscreenPageLimit = 2
+
+    }
+
+    private fun notifyDataSetChanged() {
+        mEnableList.mapTo(mFragmentList) { NewsArticleFragment.newInstance(it.channelName, "") }
+        mAdapter.notifyDataSetChanged()
     }
 
     private fun initNewsChannelDatas() {
@@ -85,7 +103,7 @@ class NewsFragment : BaseFragment(), NewsContract.View, View.OnClickListener {
         if (!TextUtils.isEmpty(json))
             mUnEnableList = mGson.fromJson<ArrayList<NewsChannel>>(json, type)
 
-        initView()
+        notifyDataSetChanged()
     }
 
     override fun showNewsChannelList(list: ArrayList<String>) {
@@ -108,10 +126,12 @@ class NewsFragment : BaseFragment(), NewsContract.View, View.OnClickListener {
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater?.inflate(R.menu.main, menu)
+        inflater?.inflate(R.menu.menu_search, menu)
         val menuItem = menu?.findItem(R.id.action_search)
         val searchView = menuItem?.actionView
-        searchView?.setOnClickListener {
+        searchView?.findViewById<EditText>(R.id.edit_text)?.setOnClickListener {
+            val intent = Intent(activity, SearchActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -135,7 +155,7 @@ class NewsFragment : BaseFragment(), NewsContract.View, View.OnClickListener {
     }
 
     private fun <T> listMove(datas: MutableList<T>, startPos: Int, endPos: Int) {
-        val data = datas.get(startPos)
+        val data = datas[startPos]
         datas.removeAt(startPos)
         datas.add(endPos, data)
     }
@@ -151,7 +171,7 @@ class NewsFragment : BaseFragment(), NewsContract.View, View.OnClickListener {
             val channel = mUnEnableList.removeAt(starPos)
             channel.isEnable = true
             mEnableList.add(endPos, channel)
-            mFragmentList.add(NewsArticleFragment.newInstance(channel.channelName!!))
+            mFragmentList.add(NewsArticleFragment.newInstance(channel.channelName, ""))
         }
 
         override fun onMoveToOtherChannel(starPos: Int, endPos: Int) {
@@ -162,10 +182,4 @@ class NewsFragment : BaseFragment(), NewsContract.View, View.OnClickListener {
         }
     }
 
-    companion object {
-
-        fun newInstance(): NewsFragment {
-            return NewsFragment()
-        }
-    }
 }

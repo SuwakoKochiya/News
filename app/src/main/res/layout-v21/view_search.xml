@@ -4,18 +4,25 @@
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize">
 
-    <AutoCompleteTextView
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/edit_text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/margin_small"
-        android:layout_marginRight="@dimen/margin_normal"
-        android:layout_marginTop="@dimen/margin_small"
+        android:layout_marginBottom="@dimen/dp_8"
+        android:layout_marginRight="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_8"
         android:background="@drawable/shape_corners_white_4"
         android:drawableLeft="@drawable/ic_search_gray_18dp"
-        android:drawablePadding="@dimen/margin_small"
+        android:drawablePadding="@dimen/dp_8"
+        android:focusable="false"
         android:gravity="center_vertical"
         android:hint="@string/new_search_hint"
-        android:paddingLeft="@dimen/margin_small"
+        android:imeActionId="66"
+        android:imeActionLabel="搜索"
+        android:imeOptions="actionSearch"
+        android:paddingLeft="@dimen/dp_8"
+        android:singleLine="true"
+        android:textColor="@color/color_text_first"
         android:textColorHint="@color/color_text_hint"
         android:textSize="@dimen/sp_14" />
 </RelativeLayout>

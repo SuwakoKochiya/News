@@ -1,27 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- 通用配置 margin -->
-    <dimen name="margin_tiny">5dp</dimen>
-    <dimen name="margin_small">8dp</dimen>
-    <dimen name="margin_normal">16dp</dimen>
-    <dimen name="margin_big">24dp</dimen>
-    <dimen name="margin_large">48dp</dimen>
-    <dimen name="margin_xlarge">56dp</dimen>
+    <dimen name="dp_4">4dp</dimen>
+    <dimen name="dp_8">8dp</dimen>
+    <dimen name="dp_16">16dp</dimen>
+    <dimen name="dp_24">24dp</dimen>
+    <dimen name="dp_48">48dp</dimen>
+    <dimen name="dp_56">56dp</dimen>
 
-    <!-- 通用配置 padding -->
-    <dimen name="padding_tiny">5dp</dimen>
-    <dimen name="padding_small">8dp</dimen>
-    <dimen name="padding_normal">16dp</dimen>
-    <dimen name="padding_big">24dp</dimen>
-    <dimen name="padding_large">48dp</dimen>
-    <dimen name="padding_xlarge">56dp</dimen>
-
-    <dimen name="text_size_tiny">10sp</dimen>
-    <dimen name="text_size_small">12sp</dimen>
-    <dimen name="text_size_normal">14sp</dimen>
-    <dimen name="text_size_big">16sp</dimen>
-    <dimen name="text_size_large">18sp</dimen>
-    <dimen name="text_size_xlarge">20sp</dimen>
+    <dimen name="sp_10">10sp</dimen>
+    <dimen name="sp_12">12sp</dimen>
+    <dimen name="sp_14">14sp</dimen>
+    <dimen name="sp_16">16sp</dimen>
+    <dimen name="sp_18">18sp</dimen>
+    <dimen name="sp_20">20sp</dimen>
 
     <dimen name="status_bar_height">0dp</dimen>
     <dimen name="app_bar_layout_elevation">4dp</dimen>

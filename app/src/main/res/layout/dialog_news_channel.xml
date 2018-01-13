@@ -27,9 +27,9 @@
             android:layout_height="match_parent"
             android:clipToPadding="false"
             android:nestedScrollingEnabled="false"
-            android:paddingBottom="@dimen/padding_normal"
-            android:paddingLeft="@dimen/padding_normal"
-            android:paddingRight="@dimen/padding_normal"
+            android:paddingBottom="@dimen/dp_16"
+            android:paddingLeft="@dimen/dp_16"
+            android:paddingRight="@dimen/dp_16"
             android:visibility="visible" />
     </FrameLayout>
 </LinearLayout>

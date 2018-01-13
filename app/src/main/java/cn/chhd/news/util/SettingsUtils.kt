@@ -47,6 +47,14 @@ object SettingsUtils {
         return SPUtils.getInstance().getFloat(Constant.PREF_TEXT_SIZE, 0f)
     }
 
+    fun setWebViewTextSize(textSize: Int) {
+        SPUtils.getInstance().put(Constant.PREF_TEXT_SIZE_WEB_VIEW, textSize)
+    }
+
+    fun getWebViewTextSize(): Int {
+        return SPUtils.getInstance().getInt(Constant.PREF_TEXT_SIZE_WEB_VIEW, 100)
+    }
+
     fun isAutoNightMode(): Boolean {
         return mPreferences.getBoolean(Constant.PREF_AUTO_NIGHT_MODE_SWITCH, false)
     }

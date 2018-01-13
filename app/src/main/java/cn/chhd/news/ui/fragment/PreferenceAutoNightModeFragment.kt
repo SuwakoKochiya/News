@@ -3,27 +3,20 @@ package cn.chhd.news.ui.fragment
 import android.annotation.SuppressLint
 import android.app.TimePickerDialog
 import android.os.Bundle
+import android.os.Handler
 import android.preference.PreferenceFragment
+import android.preference.SwitchPreference
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TimePicker
 import cn.chhd.news.R
-import cn.chhd.news.global.Constant
-import java.util.*
-import android.content.ContentResolver
-import android.os.Handler
-import android.preference.PreferenceManager
 import cn.chhd.news.global.App
+import cn.chhd.news.global.Constant
 import cn.chhd.news.ui.activity.base.BaseActivity
 import cn.chhd.news.util.SettingsUtils
-import com.blankj.utilcode.util.LogUtils
 import java.text.DecimalFormat
 
 
-/**
- * Created by 葱花滑蛋 on 2017/12/26.
- */
 class PreferenceAutoNightModeFragment : PreferenceFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,11 +32,19 @@ class PreferenceAutoNightModeFragment : PreferenceFragment() {
     @SuppressLint("ApplySharedPref")
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        findPreference(Constant.PREF_AUTO_NIGHT_MODE_SWITCH).setOnPreferenceChangeListener { _, newValue ->
-            PreferenceManager.getDefaultSharedPreferences(activity).edit()
-                    .putBoolean(Constant.PREF_AUTO_NIGHT_MODE_SWITCH, newValue as Boolean).commit()
-            App.mInstance.initNightMode()
-            Handler().postDelayed({ (activity as BaseActivity).reCreateToAll() }, 500)
+        findPreference(Constant.PREF_AUTO_NIGHT_MODE_SWITCH).setOnPreferenceChangeListener { preference, newValue ->
+            preference as SwitchPreference
+            newValue as Boolean
+            if (preference.isChecked != newValue) {
+                Handler().post {
+                    preference.isEnabled = false
+                    App.mInstance.initNightMode()
+                    Handler().postDelayed({
+                        preference.isEnabled = true
+                        (activity as BaseActivity).reCreateToAll()
+                    }, 500)
+                }
+            }
             true
         }
     }

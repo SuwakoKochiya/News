@@ -4,9 +4,9 @@ import cn.chhd.news.bean.ListData
 import cn.chhd.news.bean.NewsArticle
 import cn.chhd.news.contract.NewsArticleContract
 import cn.chhd.news.global.Config
-import cn.chhd.news.http.RxHttpReponseCompat
 import cn.chhd.news.http.SimpleSubscriber
 import cn.chhd.news.presenter.base.BasePresenter
+import com.trello.rxlifecycle2.android.FragmentEvent
 import javax.inject.Inject
 
 /**
@@ -16,34 +16,25 @@ class NewsArticlePresenter
 @Inject constructor(private val model: NewsArticleContract.Model, private val view: NewsArticleContract.View)
     : BasePresenter<NewsArticleContract.Model, NewsArticleContract.View>(model, view) {
 
-    private var mSubscriber: SimpleSubscriber<ListData<NewsArticle>>? = null
-
     fun requestNewsArticleList(channel: String,
                                num: Int,
                                start: Int) {
-        mSubscriber = getSubscriber()
-        model.getNewsArticlelList(Config.JISU_APP_KEY, channel, num, start).compose(RxHttpReponseCompat.transform()).subscribe(mSubscriber)
-    }
+        model.getNewsArticleList(Config.JISU_APP_KEY, channel, num, start)
+                .compose(view.bindToLifecycle(FragmentEvent.DESTROY))
+                .subscribe(object : SimpleSubscriber<ListData<NewsArticle>>(view) {
 
-    private fun getSubscriber(): SimpleSubscriber<ListData<NewsArticle>> {
-        return object : SimpleSubscriber<ListData<NewsArticle>>(view) {
+                    override fun success(t: ListData<NewsArticle>) {
+                        if (t.list != null && !t.list?.isEmpty()!!) {
+                            view.showNewsArticlelList(t.list!!)
+                        } else {
+                            view.showPageEmpty()
+                        }
+                    }
 
-            override fun success(t: ListData<NewsArticle>) {
-                if (t.list != null && !t.list?.isEmpty()!!) {
-                    view.showNewsArticlelList(t.list!!)
-                } else {
-                    view.showPageEmpty()
-                }
-            }
-
-            override fun error(e: Throwable) {
-                super.error(e)
-                view.showPageError()
-            }
-        }
-    }
-
-    override fun onDestroy() {
-        mSubscriber?.dispose()
+                    override fun error(e: Throwable) {
+                        super.error(e)
+                        view.showPageError()
+                    }
+                })
     }
 }

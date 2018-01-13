@@ -11,8 +11,8 @@ class ResponseData<T> {
      * result : ["头条","新闻","财经","体育","娱乐","军事","教育","科技","NBA","股票","星座","女性","健康","育儿"]
      */
 
-    var status: String? = null
-    var msg: String? = null
+    var status = ""
+    var msg = ""
     var result: T? = null
 
     val isSuccess: Boolean

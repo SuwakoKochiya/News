@@ -8,6 +8,7 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:elevation="@dimen/dp_4"
         android:paddingTop="@dimen/status_bar_height">
 
         <android.support.v7.widget.Toolbar
@@ -22,8 +23,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/ThemeOverlay.Light">
+            android:layout_height="wrap_content">
 
             <android.support.design.widget.TabLayout
                 android:id="@+id/tab_layout"
@@ -43,8 +43,7 @@
                 android:layout_height="48dp"
                 android:layout_alignParentRight="true"
                 android:alpha="0.85"
-                android:background="@color/color_background"
-                android:theme="@style/ThemeOverlay.Light">
+                android:background="@color/color_background">
 
                 <ImageView
                     android:id="@+id/iv_add"

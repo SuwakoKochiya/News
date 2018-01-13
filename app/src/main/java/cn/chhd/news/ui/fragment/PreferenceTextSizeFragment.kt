@@ -1,9 +1,7 @@
 package cn.chhd.news.ui.fragment
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.preference.PreferenceFragment
-import android.preference.PreferenceManager
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
@@ -15,9 +13,6 @@ import cn.chhd.news.util.SettingsUtils
 import com.jakewharton.rxbinding2.widget.RxSeekBar
 import kotlinx.android.synthetic.main.fragment_preference_text_size.*
 
-/**
- * Created by 葱花滑蛋 on 2017/12/23.
- */
 class PreferenceTextSizeFragment : PreferenceFragment() {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {

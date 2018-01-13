@@ -1,8 +1,13 @@
 package cn.chhd.news.ui.adapter
 
+import android.app.Activity
 import android.support.v4.app.Fragment
+import android.support.v7.widget.PopupMenu
+import android.text.Html
 import android.text.TextUtils
 import android.util.TypedValue
+import android.view.Gravity
+import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -19,7 +24,7 @@ import com.chad.library.adapter.base.BaseViewHolder
  * Created by 葱花滑蛋 on 2017/12/16.
  */
 
-class NewsArticleAdapter(val fragment: Fragment, data: List<NewsArticle>?)
+class NewsArticleAdapter(data: List<NewsArticle>?)
     : BaseMultiItemQuickAdapter<NewsArticle, BaseViewHolder>(data) {
 
     init {
@@ -47,7 +52,18 @@ class NewsArticleAdapter(val fragment: Fragment, data: List<NewsArticle>?)
                 val visibility = if (TextUtils.isEmpty(item.pic)) View.GONE else View.VISIBLE
                 helper.getView<ImageView>(R.id.iv_pic).visibility = visibility
 
-                ImageLoader.instance.with(fragment).load(item.pic).into(helper.getView(R.id.iv_pic))
+                ImageLoader.instance.with(mContext as Activity).load(item.pic)
+                        .into(helper.getView(R.id.iv_pic))
+
+                helper.getView<ImageView>(R.id.iv_more).setOnClickListener { v ->
+                    val popupMenu = PopupMenu(mContext, v, Gravity.END, 0, R.style.PopupMenuStyle)
+                    popupMenu.menuInflater.inflate(R.menu.popup_menu_new_acticle, popupMenu.menu)
+                    popupMenu.setOnMenuItemClickListener {
+                        remove(helper.adapterPosition)
+                        false
+                    }
+                    popupMenu.show()
+                }
             }
         }
     }

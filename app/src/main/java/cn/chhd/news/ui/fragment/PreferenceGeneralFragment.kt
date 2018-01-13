@@ -1,18 +1,15 @@
 package cn.chhd.news.ui.fragment
 
 import android.annotation.SuppressLint
-import android.app.Activity
-import android.app.ActivityManager
-import android.content.ComponentName
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.preference.ListPreference
 import android.preference.Preference
 import android.preference.PreferenceFragment
-import android.preference.PreferenceManager
+import android.preference.SwitchPreference
 import android.text.format.Formatter
 import android.view.LayoutInflater
 import android.view.View
@@ -26,20 +23,14 @@ import cn.chhd.news.ui.activity.base.BaseActivity
 import cn.chhd.news.util.SettingsUtils
 import com.afollestad.materialdialogs.MaterialDialog
 import com.blankj.utilcode.util.AppUtils
-import com.blankj.utilcode.util.LogUtils
 import com.tencent.bugly.beta.Beta
 import de.psdev.licensesdialog.LicensesDialog
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subscribers.ResourceSubscriber
-import kotlinx.android.synthetic.main.fragment_progress.*
 import java.util.concurrent.TimeUnit
 
-
-/**
- * Created by 葱花滑蛋 on 2017/12/18.
- */
 class PreferenceGeneralFragment : PreferenceFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,10 +46,12 @@ class PreferenceGeneralFragment : PreferenceFragment() {
     @SuppressLint("ApplySharedPref")
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        findPreference(Constant.PREF_NO_PHOTO).setOnPreferenceChangeListener { _, newValue ->
-            PreferenceManager.getDefaultSharedPreferences(activity)
-                    .edit().putBoolean(Constant.PREF_NO_PHOTO, newValue as Boolean).commit()
-            SettingsUtils.setNoPhoto(newValue as Boolean)
+        findPreference(Constant.PREF_NO_PHOTO).setOnPreferenceChangeListener { preference, newValue ->
+            preference as SwitchPreference
+            newValue as Boolean
+            if (preference.isChecked != newValue) {
+                SettingsUtils.setNoPhoto(newValue)
+            }
             true
         }
 
@@ -76,52 +69,74 @@ class PreferenceGeneralFragment : PreferenceFragment() {
             true
         }
 
-        findPreference(Constant.PREF_APP_ICON).setOnPreferenceChangeListener { _, newValue ->
+        findPreference(Constant.PREF_APP_ICON).setOnPreferenceChangeListener { preference, newValue ->
+            preference as ListPreference
             newValue as String
-            PreferenceManager.getDefaultSharedPreferences(activity)
-                    .edit().putString(Constant.PREF_APP_ICON, newValue).commit()
-            var activeName = ""
-            when (newValue) {
-                "0" -> {
-                    activeName = "cn.chhd.news.ui.activity.MainActivity"
+            if (preference != newValue) {
+                var activeName = ""
+                when (newValue) {
+                    "0" -> {
+                        activeName = "cn.chhd.news.ui.activity.MainActivity"
 
+                    }
+                    "1" -> {
+                        activeName = "cn.chhd.news.ui.activity.MainActivity-round"
+                    }
                 }
-                "1" -> {
-                    activeName = "cn.chhd.news.ui.activity.MainActivity-round"
+                if (activeName != SettingsUtils.getAppComponentClassName()) {
+                    LauncherUtils.changeLauncherInfo(activeName,
+                            SettingsUtils.getAppComponentClassName())
+                    SettingsUtils.setAppComponentClassName(activeName)
+                    showChangeAppIconDialog()
                 }
-            }
-            if (activeName != SettingsUtils.getAppComponentClassName()) {
-                LauncherUtils.changeLauncherInfo(activeName,
-                        SettingsUtils.getAppComponentClassName())
-                SettingsUtils.setAppComponentClassName(activeName)
-                showChangeAppIconDialog()
             }
             true
         }
 
-        findPreference(Constant.PREF_THEME_COLOR).setOnPreferenceChangeListener { _, newValue ->
+        findPreference(Constant.PREF_THEME_COLOR).setOnPreferenceChangeListener { preference, newValue ->
+            preference as ListPreference
             newValue as String
-            PreferenceManager.getDefaultSharedPreferences(activity)
-                    .edit().putString(Constant.PREF_THEME_COLOR, newValue).commit()
-            when (newValue) {
-                "0" -> {
-                    SettingsUtils.setThemeColor(R.style.AppTheme_Red)
+            if (preference != newValue) {
+                when (newValue) {
+                    "0" -> {
+                        SettingsUtils.setThemeColor(R.style.AppTheme_Red)
+                    }
+                    "1" -> {
+                        SettingsUtils.setThemeColor(R.style.AppTheme_Green)
+                    }
+                    "2" -> {
+                        SettingsUtils.setThemeColor(R.style.AppTheme_Blue)
+                    }
                 }
-                "1" -> {
-                    SettingsUtils.setThemeColor(R.style.AppTheme_Green)
-                }
-                "2" -> {
-                    SettingsUtils.setThemeColor(R.style.AppTheme_Blue)
-                }
+                (activity as BaseActivity).reCreateToAll()
             }
-            (activity as BaseActivity).reCreateToAll()
             true
         }
 
-        findPreference(Constant.PREF_NAVIGATION_BAR).setOnPreferenceChangeListener { _, newValue ->
-            PreferenceManager.getDefaultSharedPreferences(activity)
-                    .edit().putBoolean(Constant.PREF_NAVIGATION_BAR, newValue as Boolean).commit()
-            (activity as BaseActivity).setNavigationBarColor()
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            (findPreference(Constant.PREF_NAVIGATION_BAR) as SwitchPreference).isChecked = false
+        }
+        findPreference(Constant.PREF_NAVIGATION_BAR).setOnPreferenceChangeListener { preference, newValue ->
+            preference as SwitchPreference
+            newValue as Boolean
+            if (preference.isChecked != newValue) {
+                Handler().post {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        (activity as BaseActivity).setNavigationBarColor()
+                    } else {
+                        if (newValue) {
+                            MaterialDialog.Builder(activity)
+                                    .content("仅在安卓5.0或以上的版本生效")
+                                    .positiveText("确定")
+                                    .dismissListener {
+                                        (findPreference(Constant.PREF_NAVIGATION_BAR) as SwitchPreference)
+                                                .isChecked = false
+                                    }
+                                    .show()
+                        }
+                    }
+                }
+            }
             true
         }
 
@@ -132,8 +147,8 @@ class PreferenceGeneralFragment : PreferenceFragment() {
                 intent.data = Uri.fromParts("package", context.packageName, null)
                 startActivity(intent)
             } else {
-                preference.summary = String.format("包括图片、音频和视频缓存 (共%s)", "0KB")
                 CacheUtils.freeStorageAndNotify()
+                preference.summary = String.format("包括图片、音频和视频缓存 (共%s)", "0KB")
             }
             true
         }
@@ -166,18 +181,17 @@ class PreferenceGeneralFragment : PreferenceFragment() {
 
     @SuppressLint("ApplySharedPref")
     private val onPreferenceChangeListener = Preference.OnPreferenceChangeListener { preference, newValue ->
-        val stringValue = newValue.toString()
         if (preference is ListPreference) {
-            // For list preferences, look up the correct display value in the preference's 'entries' list.
-            val index = preference.findIndexOfValue(stringValue)
-            // Set the summary to reflect the new value.
-            preference.setSummary(if (index >= 0) preference.entries[index] else null)
-        }
-        when (preference.key) {
-            Constant.PREF_SLIDE_RETURN -> {
-                PreferenceManager.getDefaultSharedPreferences(activity)
-                        .edit().putString(Constant.PREF_SLIDE_RETURN, newValue as String).commit()
-                (activity as BaseActivity).reStart()
+            newValue as String
+            if (preference.value != newValue) {
+                val index = preference.findIndexOfValue(newValue)
+                preference.setSummary(if (index >= 0) preference.entries[index] else null)
+
+                when (preference.key) {
+                    Constant.PREF_SLIDE_RETURN -> {
+                        (activity as BaseActivity).reStart()
+                    }
+                }
             }
         }
         true

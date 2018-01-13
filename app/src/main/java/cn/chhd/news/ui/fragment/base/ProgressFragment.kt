@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.fragment_progress.*
  */
 abstract class ProgressFragment : BaseFragment(), IPageView, View.OnClickListener {
 
-    private val viewList = ArrayList<View>()
+    protected val mViewList = ArrayList<View>()
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater?.inflate(R.layout.fragment_progress, container, false)
@@ -23,21 +23,20 @@ abstract class ProgressFragment : BaseFragment(), IPageView, View.OnClickListene
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewList.add(loading)
-        viewList.add(empty)
-        viewList.add(error)
-        viewList.add(content)
+        mViewList.add(loading)
+        mViewList.add(empty)
+        mViewList.add(error)
+        mViewList.add(content)
 
         if (getContentResId() != 0)
             LayoutInflater.from(activity).inflate(getContentResId(), content, true)
 
+        btn_refresh.setOnClickListener(this)
         btn_retry.setOnClickListener(this)
     }
 
-    abstract fun getContentResId(): Int
-
     private fun showStatusView(viewId: Int) {
-        for (view in viewList) {
+        for (view in mViewList) {
             if (view.id == viewId) {
                 view.visibility = View.VISIBLE
             } else {
@@ -45,6 +44,7 @@ abstract class ProgressFragment : BaseFragment(), IPageView, View.OnClickListene
             }
         }
     }
+
 
     protected fun showLoadingView() {
         showStatusView(R.id.loading)
@@ -62,14 +62,7 @@ abstract class ProgressFragment : BaseFragment(), IPageView, View.OnClickListene
         showStatusView(R.id.content)
     }
 
-    override fun onClick(p0: View?) {
-        when (p0?.id) {
-            R.id.btn_retry -> {
-                showLoadingView()
-                retry()
-            }
-        }
-    }
+    abstract fun getContentResId(): Int
 
     abstract fun retry()
 
@@ -86,7 +79,15 @@ abstract class ProgressFragment : BaseFragment(), IPageView, View.OnClickListene
     }
 
     override fun showPageError() {
-        showEmptyView()
+        showErrorView()
     }
 
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.btn_refresh, R.id.btn_retry -> {
+                showLoadingView()
+                retry()
+            }
+        }
+    }
 }

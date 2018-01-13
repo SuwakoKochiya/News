@@ -11,15 +11,33 @@
         android:layout_centerInParent="true"
         android:visibility="invisible" />"
 
-    <TextView
+    <LinearLayout
         android:id="@+id/empty"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="@string/no_more_data"
-        android:textColor="@color/color_text_666666"
-        android:textSize="@dimen/text_size_normal"
-        android:visibility="invisible" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/dp_8"
+        android:visibility="invisible">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_data"
+            android:textColor="@color/color_text_666666"
+            android:textSize="@dimen/sp_14" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_16"
+            android:text="刷新"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/sp_12"
+            app:backgroundTint="?attr/colorAccent" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/error"
@@ -28,7 +46,7 @@
         android:clipToPadding="false"
         android:gravity="center"
         android:orientation="vertical"
-        android:padding="@dimen/margin_small"
+        android:padding="@dimen/dp_8"
         android:visibility="invisible">
 
         <TextView
@@ -36,16 +54,16 @@
             android:layout_height="wrap_content"
             android:text="@string/network_connect_fail"
             android:textColor="@color/color_text_666666"
-            android:textSize="@dimen/text_size_normal" />
+            android:textSize="@dimen/sp_14" />
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_retry"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_normal"
+            android:layout_marginTop="@dimen/dp_16"
             android:text="@string/retry"
             android:textColor="@android:color/white"
-            android:textSize="@dimen/text_size_small"
-            app:backgroundTint="@color/colorPrimary" />
+            android:textSize="@dimen/sp_12"
+            app:backgroundTint="?attr/colorAccent" />
     </LinearLayout>
 </RelativeLayout>

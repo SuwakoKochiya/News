@@ -1,9 +1,11 @@
 package cn.chhd.news.ui.view
 
+import android.app.Activity
 import android.content.Context
 import android.util.AttributeSet
 import cn.chhd.news.R
 import com.afollestad.materialdialogs.prefs.MaterialListPreference
+import com.blankj.utilcode.util.LogUtils
 
 /**
  * Created by 葱花滑蛋 on 2017/12/19.
@@ -17,7 +19,6 @@ class ColorListPreference(context: Context, attrs: AttributeSet) : MaterialListP
         val colorStrings = typeArray.getTextArray(R.styleable.ColorListPreference_theme_colors)
         colorStrings.mapTo(colorStringList) { it.toString() }
         typeArray.recycle()
-
         widgetLayoutResource = R.layout.widget_frame_color
     }
 }

@@ -1,6 +1,6 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -38,7 +38,7 @@
         <item name="colorAccent">@color/material_red_a700</item>
 
         <item name="color_primary">@color/material_red_500</item>
-        <item name="color_navigation_bar">@color/material_red_500</item>
+        <item name="color_navigation_bar">@color/material_red_700</item>
     </style>
 
     <style name="AppTheme.Green" parent="AppTheme">
@@ -47,7 +47,7 @@
         <item name="colorAccent">@color/material_green_a700</item>
 
         <item name="color_primary">@color/material_green_500</item>
-        <item name="color_navigation_bar">@color/material_green_500</item>
+        <item name="color_navigation_bar">@color/material_green_700</item>
     </style>
 
     <style name="AppTheme.Blue" parent="AppTheme">
@@ -56,6 +56,11 @@
         <item name="colorAccent">@color/material_blue_a700</item>
 
         <item name="color_primary">@color/material_blue_500</item>
-        <item name="color_navigation_bar">@color/material_blue_500</item>
+        <item name="color_navigation_bar">@color/material_blue_700</item>
+    </style>
+
+    <style name="PopupMenuStyle" parent="@style/Widget.AppCompat.PopupMenu.Overflow">
+        <item name="android:dropDownHorizontalOffset">0dp</item>
+        <item name="android:dropDownVerticalOffset">0dp</item>
     </style>
 </resources>

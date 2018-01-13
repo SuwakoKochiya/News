@@ -3,7 +3,7 @@ package cn.chhd.news.contract
 /**
  * Created by 葱花滑蛋 on 2017/12/12.
  */
-interface IPageView {
+interface IPageView : IBaseView {
 
     fun showPageLoading()
 

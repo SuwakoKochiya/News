@@ -12,7 +12,7 @@
         android:gravity="center"
         android:text="关注"
         android:textColor="@color/color_text_second"
-        android:textSize="@dimen/text_size_small" />
+        android:textSize="@dimen/sp_12" />
 
     <ImageView
         android:id="@+id/iv_delete"

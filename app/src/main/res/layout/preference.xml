@@ -6,8 +6,8 @@
     android:background="?android:attr/selectableItemBackground"
     android:gravity="center_vertical"
     android:minHeight="?android:attr/listPreferredItemHeight"
-    android:paddingLeft="@dimen/padding_normal"
-    android:paddingRight="@dimen/padding_normal">
+    android:paddingLeft="@dimen/dp_16"
+    android:paddingRight="@dimen/dp_16">
 
     <ImageView
         android:id="@+android:id/icon"
@@ -30,7 +30,7 @@
             android:fadingEdge="horizontal"
             android:singleLine="true"
             android:textColor="@color/color_text_first"
-            android:textSize="@dimen/text_size_normal"
+            android:textSize="@dimen/sp_14"
             tools:text="title" />
 
         <TextView
@@ -42,7 +42,7 @@
             tools:text="summary"
             android:maxLines="4"
             android:textColor="@color/color_text_second"
-            android:textSize="@dimen/text_size_normal" />
+            android:textSize="@dimen/sp_14" />
     </RelativeLayout>
 
     <LinearLayout

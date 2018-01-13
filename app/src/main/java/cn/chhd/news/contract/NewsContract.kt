@@ -9,11 +9,11 @@ import io.reactivex.Observable
  */
 interface NewsContract {
 
-    interface View {
+    interface View : IPageView {
         fun showNewsChannelList(list: ArrayList<String>)
     }
 
     interface Model {
-        fun getNewsChannelList(appkey: String): Flowable<ResponseData<ArrayList<String>>>
+        fun getNewsChannelList(appkey: String): Flowable<ArrayList<String>>
     }
 }

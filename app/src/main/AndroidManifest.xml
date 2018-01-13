@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="cn.chhd.news">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -13,16 +14,16 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_LOGS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <!-- BuglySDK、BuglyUpgrade、BuglyHotfix End -->
 
+    <!-- BuglySDK、BuglyUpgrade、BuglyHotfix End -->
     <application
         android:name=".global.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:replace="android:name">
 
         <!-- BuglyUpgrade BuglyHotfix Start -->
         <activity
@@ -50,8 +51,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity-alias
-            android:name="cn.chhd.news.ui.activity.MainActivity-round"
+            android:name=".ui.activity.MainActivity-round"
             android:enabled="false"
             android:icon="@mipmap/ic_launcher_round"
             android:label="@string/app_name"
@@ -65,6 +67,9 @@
 
         <activity android:name=".ui.activity.SettingsActivity" />
         <activity android:name=".ui.activity.SearchActivity" />
+        <activity android:name=".ui.activity.WebViewActivity">
+
+        </activity>
     </application>
 
 </manifest>
