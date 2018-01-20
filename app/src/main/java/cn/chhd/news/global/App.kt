@@ -1,5 +1,7 @@
 package cn.chhd.news.global
 
+import android.content.Context
+import android.support.multidex.MultiDex
 import android.support.v7.app.AppCompatDelegate
 import cn.chhd.mylibrary.global.BaseApplication
 import cn.chhd.news.BuildConfig
@@ -24,11 +26,22 @@ import java.util.*
  */
 class App : BaseApplication() {
 
+    companion object {
+        lateinit var mInstance: App
+    }
+
+    var mIsHotStart = false
+
     val mComponent: AppComponent by lazy {
         DaggerAppComponent.builder()
                 .appModule(AppModule(this))
                 .httpModule(HttpModule())
                 .build()
+    }
+
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
+        MultiDex.install(base);
     }
 
     override fun onCreate() {
@@ -130,9 +143,5 @@ class App : BaseApplication() {
                 .setConsoleFilter(LogUtils.V)// log 的控制台过滤器，和 logcat 过滤器同理，默认 Verbose
                 .setFileFilter(LogUtils.V)// log 文件过滤器，和 logcat 过滤器同理，默认 Verbose
                 .setStackDeep(1)// log 栈深度，默认为 1
-    }
-
-    companion object {
-        lateinit var mInstance: App
     }
 }

@@ -2,12 +2,10 @@ package cn.chhd.news.http
 
 import android.app.Activity
 import android.content.Context
-import android.os.Handler
 import android.support.v4.app.Fragment
 import cn.chhd.news.contract.IPageView
 import com.blankj.utilcode.util.LogUtils
 import io.reactivex.subscribers.ResourceSubscriber
-import java.util.*
 
 /**
  * Created by 葱花滑蛋 on 2017/12/12.

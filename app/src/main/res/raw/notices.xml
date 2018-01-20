@@ -94,4 +94,10 @@
         <copyright></copyright>
         <license>Apache Software License 2.0</license>
     </notice>
+    <notice>
+        <name>PhotoView</name>
+        <url>https://github.com/chrisbanes/PhotoView</url>
+        <copyright>https://github.com/chrisbanes/PhotoView</copyright>
+        <license>Apache Software License 2.0</license>
+    </notice>
 </notices>

@@ -1,18 +1,14 @@
 package cn.chhd.news.http
 
-import org.reactivestreams.Publisher
-
 import cn.chhd.news.bean.ResponseData
 import io.reactivex.Flowable
 import io.reactivex.FlowableTransformer
-import io.reactivex.Observable
-import io.reactivex.functions.Function
 
 /**
  * Created by 葱花滑蛋 on 2017/12/16.
  */
 
-object RxHttpReponseCompat {
+object RxHttpResponseCompat {
 
     fun <T> transform(): FlowableTransformer<ResponseData<T>, T> {
         return FlowableTransformer { upstream ->

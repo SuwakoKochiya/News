@@ -10,10 +10,8 @@ import android.view.Menu
 import android.view.MenuItem
 import cn.chhd.news.R
 import cn.chhd.news.global.Constant
-import cn.chhd.news.ui.activity.base.BaseActivity
 import cn.chhd.news.ui.activity.base.ToolbarActivity
 import cn.chhd.news.ui.fragment.PreferenceGeneralFragment
-import kotlinx.android.synthetic.main.toolbar.*
 
 
 class SettingsActivity : ToolbarActivity() {

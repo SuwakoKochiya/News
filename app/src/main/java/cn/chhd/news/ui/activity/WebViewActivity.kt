@@ -16,7 +16,6 @@ import android.widget.TextView
 import cn.chhd.mylibrary.util.ToastUtils
 import cn.chhd.news.R
 import cn.chhd.news.global.Constant
-import cn.chhd.news.ui.activity.base.BaseActivity
 import cn.chhd.news.ui.activity.base.ToolbarActivity
 import cn.chhd.news.util.SettingsUtils
 import cn.sharesdk.framework.Platform
@@ -25,7 +24,6 @@ import cn.sharesdk.onekeyshare.OnekeyShare
 import com.afollestad.materialdialogs.MaterialDialog
 import com.blankj.utilcode.util.LogUtils
 import kotlinx.android.synthetic.main.activity_web_view.*
-import kotlinx.android.synthetic.main.toolbar.*
 import java.util.*
 
 class WebViewActivity : ToolbarActivity() {

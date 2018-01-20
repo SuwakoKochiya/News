@@ -1,7 +1,6 @@
 package cn.chhd.news.ui.view
 
 import android.content.DialogInterface
-import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.support.v4.app.FragmentManager
@@ -19,7 +18,6 @@ import cn.chhd.news.ui.adapter.NewsChannelAdapter
 import cn.chhd.news.ui.listener.OnNewsChannelChangeListener
 import cn.chhd.news.ui.listener.OnNewsChannelDragListener
 import cn.chhd.news.util.SettingsUtils
-import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.SPUtils
 import com.chad.library.adapter.base.BaseViewHolder
 import com.google.gson.Gson
@@ -140,8 +138,7 @@ class NewsChannelDialog : DialogFragment(), View.OnClickListener {
     companion object {
 
         fun newInstance(): NewsChannelDialog {
-            val dialog = NewsChannelDialog()
-            return dialog
+            return NewsChannelDialog()
         }
     }
 

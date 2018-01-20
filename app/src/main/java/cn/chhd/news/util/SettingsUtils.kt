@@ -1,6 +1,5 @@
 package cn.chhd.news.util
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.preference.PreferenceManager
 import cn.chhd.news.R

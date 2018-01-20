@@ -1,9 +1,7 @@
 package cn.chhd.news.presenter
 
 import cn.chhd.news.bean.ListData
-import cn.chhd.news.bean.NewsArticle
 import cn.chhd.news.bean.WechatArticle
-import cn.chhd.news.contract.NewsArticleContract
 import cn.chhd.news.contract.WechatArticleContract
 import cn.chhd.news.global.Config
 import cn.chhd.news.http.SimpleSubscriber

@@ -2,30 +2,22 @@ package cn.chhd.news.ui.fragment
 
 
 import android.os.Bundle
-import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import cn.chhd.mylibrary.ui.adapter.FragmentAdapter
-import cn.chhd.mylibrary.util.ToastUtils
 import cn.chhd.news.R
 import cn.chhd.news.bean.NewsArticle
 import cn.chhd.news.contract.NewsArticleContract
 import cn.chhd.news.di.component.DaggerNewsArticleComponent
 import cn.chhd.news.di.module.NewsArticleModule
 import cn.chhd.news.global.App
-import cn.chhd.news.global.Constant
 import cn.chhd.news.presenter.NewsArticlePresenter
 import cn.chhd.news.ui.activity.WebViewActivity
 import cn.chhd.news.ui.adapter.NewsArticleAdapter
-import cn.chhd.news.ui.fragment.base.LazyFragment
 import cn.chhd.news.ui.fragment.base.PullToRefreshFragment
-import com.blankj.utilcode.util.LogUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
-import com.trello.rxlifecycle2.android.FragmentEvent
-import io.reactivex.Flowable
 import kotlinx.android.synthetic.main.fragment_news_article.*
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 
@@ -41,7 +33,7 @@ class NewsArticleFragment : PullToRefreshFragment<NewsArticleAdapter, NewsArticl
         }
     }
 
-    private var mTitle = ""
+     var mTitle = ""
     private var mNum = 10
     private var mStart = 0
 

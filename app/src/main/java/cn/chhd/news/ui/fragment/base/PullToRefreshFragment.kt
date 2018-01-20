@@ -61,7 +61,7 @@ abstract class PullToRefreshFragment<Adapter : BaseQuickAdapter<*, *>, Bean>
         }
     }
 
-    override fun lazyLoad() {
+    override fun onLazyLoad() {
         refresh()
     }
 

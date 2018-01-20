@@ -2,7 +2,6 @@ package cn.chhd.news.http
 
 import cn.chhd.news.bean.*
 import io.reactivex.Flowable
-import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query
 

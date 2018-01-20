@@ -3,7 +3,7 @@ package cn.chhd.news.model
 import cn.chhd.news.bean.WechatChannel
 import cn.chhd.news.contract.WechatContract
 import cn.chhd.news.http.ApiService
-import cn.chhd.news.http.RxHttpReponseCompat
+import cn.chhd.news.http.RxHttpResponseCompat
 import cn.chhd.news.model.base.BaseModel
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -17,7 +17,7 @@ class WechatModel(apiService: ApiService) : BaseModel(apiService), WechatContrac
 
     override fun getWechatChannelList(appkey: String): Flowable<MutableList<WechatChannel>> {
         return apiService.getWechatChannelList(appkey)
-                .compose(RxHttpReponseCompat.transform())
+                .compose(RxHttpResponseCompat.transform())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
     }

@@ -21,10 +21,10 @@ import cn.chhd.news.global.App
 import cn.chhd.news.global.Constant
 import cn.chhd.news.presenter.NewsPresenter
 import cn.chhd.news.ui.activity.SearchActivity
-import cn.chhd.news.ui.fragment.base.BaseFragment
 import cn.chhd.news.ui.fragment.base.ProgressFragment
 import cn.chhd.news.ui.listener.OnNewsChannelChangeListener
 import cn.chhd.news.ui.view.NewsChannelDialog
+import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.SPUtils
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -175,7 +175,8 @@ class NewsFragment : ProgressFragment(), NewsContract.View, View.OnClickListener
         }
 
         override fun onMoveToOtherChannel(starPos: Int, endPos: Int) {
-            mFragmentList.removeAt(starPos)
+            val removeAt = mFragmentList.removeAt(starPos) as NewsArticleFragment
+            LogUtils.i(starPos, removeAt.mTitle, mFragmentList.size)
             val channel = mEnableList.removeAt(starPos)
             channel.isEnable = false
             mUnEnableList.add(endPos, channel)

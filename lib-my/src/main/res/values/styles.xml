@@ -1,5 +1,4 @@
 <resources>
-
     <!-- 黑色箭头 -->
     <style name="ThemeOverlay.Light" parent="ThemeOverlay.AppCompat.Light" />
     <!-- 白色箭头 -->
@@ -9,4 +8,6 @@
     <!-- 黑色背景 -->
     <style name="PopupOverlay.Dark" parent="ThemeOverlay.AppCompat.Dark" />
 
+    <style name="FullscreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    </style>
 </resources>

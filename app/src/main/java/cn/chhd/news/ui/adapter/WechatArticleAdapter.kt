@@ -9,6 +9,7 @@ import android.widget.TextView
 import cn.chhd.news.R
 import cn.chhd.news.bean.WechatArticle
 import cn.chhd.news.global.Constant
+import cn.chhd.news.ui.activity.ImageActivity
 import cn.chhd.news.util.ImageLoader
 import cn.chhd.news.util.SettingsUtils
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter
@@ -47,6 +48,10 @@ class WechatArticleAdapter(data: List<WechatArticle>?)
 
                 val visibility = if (TextUtils.isEmpty(item.pic)) View.GONE else View.VISIBLE
                 helper.getView<ImageView>(R.id.iv_pic).visibility = visibility
+
+                helper.getView<ImageView>(R.id.iv_pic).setOnClickListener {
+                    ImageActivity.start(mContext, item.pic)
+                }
 
                 ImageLoader.instance.with(mContext as Activity).load(item.pic)
                         .into(helper.getView(R.id.iv_pic))

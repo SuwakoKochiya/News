@@ -55,15 +55,8 @@ public class FragmentAdapter extends FragmentStatePagerAdapter {
         }
     }
 
-    public void notifyDataSetChanged(List<Fragment> fragmentList) {
-        this.fragmentList = fragmentList;
-        notifyDataSetChanged();
+    @Override
+    public int getItemPosition(Object object) {
+        return POSITION_NONE;
     }
-
-    public void notifyDataSetChanged(List<Fragment> fragmentList, List<String> titleList) {
-        this.fragmentList = fragmentList;
-        this.titleList = titleList;
-        notifyDataSetChanged();
-    }
-
 }

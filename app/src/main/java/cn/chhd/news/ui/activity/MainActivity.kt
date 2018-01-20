@@ -9,7 +9,6 @@ import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatDelegate
 import android.view.Gravity
-import android.widget.TextView
 import cn.chhd.mylibrary.util.BottomNavigationViewHelper
 import cn.chhd.mylibrary.util.ToastUtils
 import cn.chhd.news.R
@@ -55,8 +54,6 @@ class MainActivity : BaseActivity() {
             item.icon = ContextCompat.getDrawable(mActivity, R.drawable.ic_brightness_low_black_24dp)
             item.title = getString(R.string.nav_theme_low)
         }
-
-        SettingsUtils.setAppComponentClassName(componentName.className)
 
         button.setOnClickListener {
         }

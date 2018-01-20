@@ -1,22 +1,19 @@
 package cn.chhd.news.ui.adapter
 
 import android.app.Activity
-import android.support.v4.app.Fragment
 import android.support.v7.widget.PopupMenu
-import android.text.Html
 import android.text.TextUtils
 import android.util.TypedValue
 import android.view.Gravity
-import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import cn.chhd.news.R
 import cn.chhd.news.bean.NewsArticle
 import cn.chhd.news.global.Constant
+import cn.chhd.news.ui.activity.ImageActivity
 import cn.chhd.news.util.ImageLoader
 import cn.chhd.news.util.SettingsUtils
-import com.bumptech.glide.Glide
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 
@@ -54,6 +51,10 @@ class NewsArticleAdapter(data: List<NewsArticle>?)
 
                 ImageLoader.instance.with(mContext as Activity).load(item.pic)
                         .into(helper.getView(R.id.iv_pic))
+
+                helper.getView<ImageView>(R.id.iv_pic).setOnClickListener {
+                    ImageActivity.start(mContext, item.pic)
+                }
 
                 helper.getView<ImageView>(R.id.iv_more).setOnClickListener { v ->
                     val popupMenu = PopupMenu(mContext, v, Gravity.END, 0, R.style.PopupMenuStyle)

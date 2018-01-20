@@ -4,7 +4,7 @@ import cn.chhd.news.bean.ListData
 import cn.chhd.news.bean.WechatArticle
 import cn.chhd.news.contract.WechatArticleContract
 import cn.chhd.news.http.ApiService
-import cn.chhd.news.http.RxHttpReponseCompat
+import cn.chhd.news.http.RxHttpResponseCompat
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -18,7 +18,7 @@ class WechatArticleModel(private val apiService: ApiService) : WechatArticleCont
     override fun getWechatArticleList(appkey: String, id: String, num: Int, start: Int)
             : Flowable<ListData<WechatArticle>> {
         return apiService.getWechatArticleList(appkey, id, num, start)
-                .compose(RxHttpReponseCompat.transform())
+                .compose(RxHttpResponseCompat.transform())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
     }

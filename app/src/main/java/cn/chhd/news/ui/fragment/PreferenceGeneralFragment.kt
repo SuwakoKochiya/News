@@ -16,6 +16,7 @@ import android.view.View
 import android.view.ViewGroup
 import cn.chhd.mylibrary.util.CacheUtils
 import cn.chhd.mylibrary.util.LauncherUtils
+import cn.chhd.mylibrary.util.ToastUtils
 import cn.chhd.news.R
 import cn.chhd.news.global.Constant
 import cn.chhd.news.ui.activity.SettingsActivity
@@ -76,11 +77,11 @@ class PreferenceGeneralFragment : PreferenceFragment() {
                 var activeName = ""
                 when (newValue) {
                     "0" -> {
-                        activeName = "cn.chhd.news.ui.activity.MainActivity"
+                        activeName = "cn.chhd.news.ui.activity.SplashActivity"
 
                     }
                     "1" -> {
-                        activeName = "cn.chhd.news.ui.activity.MainActivity-round"
+                        activeName = "cn.chhd.news.ui.activity.SplashActivity-round"
                     }
                 }
                 if (activeName != SettingsUtils.getAppComponentClassName()) {
@@ -146,6 +147,7 @@ class PreferenceGeneralFragment : PreferenceFragment() {
                 intent.action = "android.settings.APPLICATION_DETAILS_SETTINGS"
                 intent.data = Uri.fromParts("package", context.packageName, null)
                 startActivity(intent)
+                ToastUtils.showLong("安卓6.0及以上，请手动清理缓存")
             } else {
                 CacheUtils.freeStorageAndNotify()
                 preference.summary = String.format("包括图片、音频和视频缓存 (共%s)", "0KB")

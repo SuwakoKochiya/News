@@ -1,9 +1,6 @@
 package cn.chhd.news.ui.fragment.base
 
 import android.os.Bundle
-import android.view.View
-import cn.chhd.mylibrary.ui.adapter.FragmentAdapter
-import com.blankj.utilcode.util.LogUtils
 
 
 /**
@@ -18,13 +15,13 @@ abstract class LazyFragment : ProgressFragment() {
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
         mIsVisibleToUser = isVisibleToUser
-        preLazyLoad()
+        onPreLazyLoad()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         mHasViewCreate = true
-        preLazyLoad()
+        onPreLazyLoad()
     }
 
     override fun onDestroy() {
@@ -33,12 +30,12 @@ abstract class LazyFragment : ProgressFragment() {
         super.onDestroy()
     }
 
-    private fun preLazyLoad() {
+    private fun onPreLazyLoad() {
         if (mIsVisibleToUser && mHasViewCreate && !mHasLazyLoad) {
             mHasLazyLoad = true
-            lazyLoad()
+            onLazyLoad()
         }
     }
 
-    protected abstract fun lazyLoad()
+    protected abstract fun onLazyLoad()
 }

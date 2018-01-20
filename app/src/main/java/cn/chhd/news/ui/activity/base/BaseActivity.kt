@@ -23,8 +23,6 @@ import com.trello.rxlifecycle2.LifecycleTransformer
 import com.trello.rxlifecycle2.android.ActivityEvent
 import com.trello.rxlifecycle2.android.FragmentEvent
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
-import android.opengl.ETC1.getWidth
-import android.opengl.ETC1.getHeight
 import android.view.View
 import android.widget.EditText
 

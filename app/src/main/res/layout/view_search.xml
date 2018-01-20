@@ -11,7 +11,7 @@
         android:layout_marginBottom="@dimen/dp_8"
         android:layout_marginRight="@dimen/dp_16"
         android:layout_marginTop="@dimen/dp_8"
-        android:background="@drawable/shape_corners_white_4"
+        android:background="@drawable/shape_fill_white_4"
         android:drawablePadding="@dimen/dp_8"
         android:focusable="false"
         android:gravity="center_vertical"

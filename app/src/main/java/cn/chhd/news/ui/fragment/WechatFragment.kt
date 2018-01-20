@@ -3,9 +3,7 @@ package cn.chhd.news.ui.fragment
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import cn.chhd.mylibrary.ui.adapter.FragmentAdapter
 import cn.chhd.news.R
 import cn.chhd.news.bean.WechatChannel
@@ -14,9 +12,7 @@ import cn.chhd.news.di.component.DaggerWechatComponent
 import cn.chhd.news.di.module.WechatModule
 import cn.chhd.news.global.App
 import cn.chhd.news.presenter.WechatPresenter
-import cn.chhd.news.ui.fragment.base.BaseFragment
 import cn.chhd.news.ui.fragment.base.ProgressFragment
-import com.blankj.utilcode.util.LogUtils
 import kotlinx.android.synthetic.main.fragment_wechat.*
 import javax.inject.Inject
 
