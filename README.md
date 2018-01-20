@@ -2,22 +2,22 @@
 http://fir.im/21bh
 
 ## 截图
-![image](https://github.com/conghuahuadan/News/blob/master/screenshots/Snipaste_2018-01-15_21-24-36?raw=true)
-![image](https://github.com/conghuahuadan/News/blob/master/screenshots/Snipaste_2018-01-15_21-24-55?raw=true)
-![image](https://github.com/conghuahuadan/News/blob/master/screenshots/Snipaste_2018-01-15_21-25-22?raw=true)
-![image](https://github.com/conghuahuadan/News/blob/master/screenshots/Snipaste_2018-01-15_21-25-37?raw=true)
-![image](https://github.com/conghuahuadan/News/blob/master/screenshots/Snipaste_2018-01-15_21-26-02?raw=true)
-![image](https://github.com/conghuahuadan/News/blob/master/screenshots/Snipaste_2018-01-15_21-26-15?raw=true)
-![image](https://github.com/conghuahuadan/News/blob/master/screenshots/Snipaste_2018-01-15_21-26-23?raw=true)
-![image](https://github.com/conghuahuadan/News/blob/master/screenshots/Snipaste_2018-01-15_21-26-38?raw=true)
-![image](https://github.com/conghuahuadan/News/blob/master/screenshots/Snipaste_2018-01-15_21-26-47?raw=true)
-![image](https://github.com/conghuahuadan/News/blob/master/screenshots/Snipaste_2018-01-15_21-27-38?raw=true)
-![image](https://github.com/conghuahuadan/News/blob/master/screenshots/Snipaste_2018-01-15_21-27-42?raw=true)
-![image](https://github.com/conghuahuadan/News/blob/master/screenshots/Snipaste_2018-01-15_21-27-51?raw=true)
-![image](https://github.com/conghuahuadan/News/blob/master/screenshots/Snipaste_2018-01-15_21-27-54?raw=true)
-![image](https://github.com/conghuahuadan/News/blob/master/screenshots/Snipaste_2018-01-15_21-28-09?raw=true)
-![image](https://github.com/conghuahuadan/News/blob/master/screenshots/Snipaste_2018-01-15_21-28-14?raw=true)
-![image](https://github.com/conghuahuadan/News/blob/master/screenshots/Snipaste_2018-01-15_21-28-14?raw=true)
+![image](https://github.com/conghuahuadan/News/blob/master/screenshots/Snipaste_2018-01-15_21-24-36.png?raw=true)
+![image](https://github.com/conghuahuadan/News/blob/master/screenshots/Snipaste_2018-01-15_21-24-55.png?raw=true)
+![image](https://github.com/conghuahuadan/News/blob/master/screenshots/Snipaste_2018-01-15_21-25-22.png?raw=true)
+![image](https://github.com/conghuahuadan/News/blob/master/screenshots/Snipaste_2018-01-15_21-25-37.png?raw=true)
+![image](https://github.com/conghuahuadan/News/blob/master/screenshots/Snipaste_2018-01-15_21-26-02.png?raw=true)
+![image](https://github.com/conghuahuadan/News/blob/master/screenshots/Snipaste_2018-01-15_21-26-15.png?raw=true)
+![image](https://github.com/conghuahuadan/News/blob/master/screenshots/Snipaste_2018-01-15_21-26-23.png?raw=true)
+![image](https://github.com/conghuahuadan/News/blob/master/screenshots/Snipaste_2018-01-15_21-26-38.png?raw=true)
+![image](https://github.com/conghuahuadan/News/blob/master/screenshots/Snipaste_2018-01-15_21-26-47.png?raw=true)
+![image](https://github.com/conghuahuadan/News/blob/master/screenshots/Snipaste_2018-01-15_21-27-38.png?raw=true)
+![image](https://github.com/conghuahuadan/News/blob/master/screenshots/Snipaste_2018-01-15_21-27-42.png?raw=true)
+![image](https://github.com/conghuahuadan/News/blob/master/screenshots/Snipaste_2018-01-15_21-27-51.png?raw=true)
+![image](https://github.com/conghuahuadan/News/blob/master/screenshots/Snipaste_2018-01-15_21-27-54.png?raw=true)
+![image](https://github.com/conghuahuadan/News/blob/master/screenshots/Snipaste_2018-01-15_21-28-09.png?raw=true)
+![image](https://github.com/conghuahuadan/News/blob/master/screenshots/Snipaste_2018-01-15_21-28-14.png?raw=true)
+![image](https://github.com/conghuahuadan/News/blob/master/screenshots/Snipaste_2018-01-15_21-28-14.png?raw=true)
 
 ## 依赖库
 > * [RxAndroid](https://github.com/ReactiveX/RxAndroid)，异步链式编程
