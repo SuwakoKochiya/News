@@ -17,7 +17,6 @@ http://fir.im/21bh
 ![image](https://github.com/conghuahuadan/News/blob/master/screenshots/Snipaste_2018-01-15_21-27-54.png?raw=true)
 ![image](https://github.com/conghuahuadan/News/blob/master/screenshots/Snipaste_2018-01-15_21-28-09.png?raw=true)
 ![image](https://github.com/conghuahuadan/News/blob/master/screenshots/Snipaste_2018-01-15_21-28-14.png?raw=true)
-![image](https://github.com/conghuahuadan/News/blob/master/screenshots/Snipaste_2018-01-15_21-28-14.png?raw=true)
 
 ## 依赖库
 > * [RxAndroid](https://github.com/ReactiveX/RxAndroid)，异步链式编程
