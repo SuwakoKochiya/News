@@ -34,8 +34,8 @@ dependencies {
 }
 
 publish {
-    userOrg = 'chhd'
-    groupId = 'com.chhd'
+    userOrg = 'conghuahuadan'
+    groupId = 'com.conghuahuadan.android'
     artifactId = 'lib-common'
     publishVersion = '0.1.0'
     desc = 'lib-common'

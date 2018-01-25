@@ -4,7 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/News.iml" filepath="$PROJECT_DIR$/News.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/lib-common/lib-my.iml" filepath="$PROJECT_DIR$/lib-common/lib-my.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lib-common/lib-common.iml" filepath="$PROJECT_DIR$/lib-common/lib-common.iml" />
+      <module fileurl="file://E:\AndroidStudioProjects\Project\News\lib-common\lib-my.iml" filepath="E:\AndroidStudioProjects\Project\News\lib-common\lib-my.iml" />
     </modules>
   </component>
 </project>
