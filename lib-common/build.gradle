@@ -36,8 +36,8 @@ dependencies {
 publish {
     userOrg = 'chhd'
     groupId = 'com.chhd'
-    artifactId = 'lib-my'
+    artifactId = 'lib-common'
     publishVersion = '0.1.0'
-    desc = 'lib-my'
-    website = 'https://github.com/conghuahuadan/News'
+    desc = 'lib-common'
+    website = 'https://github.com/conghuahuadan/Lib-Common'
 }
