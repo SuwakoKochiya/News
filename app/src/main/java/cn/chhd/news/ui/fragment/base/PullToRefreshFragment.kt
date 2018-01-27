@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.RecyclerView
 import android.view.View
-import cn.chhd.mylibrary.util.ToastUtils
+import com.chhd.android.common.util.ToastUtils
 import cn.chhd.news.R
 import cn.chhd.news.global.Constant
 import com.chad.library.adapter.base.BaseQuickAdapter

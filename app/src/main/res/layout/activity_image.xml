@@ -7,7 +7,7 @@
     android:background="#333333"
     tools:context="cn.chhd.news.ui.activity.ImageActivity">
 
-    <cn.chhd.mylibrary.ui.view.HackyViewPager
+    <com.chhd.android.common.ui.view.HackyViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

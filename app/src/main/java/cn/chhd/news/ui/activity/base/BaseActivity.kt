@@ -11,7 +11,7 @@ import android.util.TypedValue
 import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
-import cn.chhd.mylibrary.util.UiUtils
+import com.chhd.android.common.util.UiUtils
 import cn.chhd.news.R
 import cn.chhd.news.contract.IBaseView
 import cn.chhd.news.global.Constant

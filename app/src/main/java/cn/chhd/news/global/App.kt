@@ -3,7 +3,6 @@ package cn.chhd.news.global
 import android.content.Context
 import android.support.multidex.MultiDex
 import android.support.v7.app.AppCompatDelegate
-import cn.chhd.mylibrary.global.BaseApplication
 import cn.chhd.news.BuildConfig
 import cn.chhd.news.R
 import cn.chhd.news.di.component.AppComponent
@@ -14,6 +13,7 @@ import cn.chhd.news.util.ImageLoader
 import cn.chhd.news.util.SettingsUtils
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.Utils
+import com.chhd.android.common.global.BaseApplication
 import com.facebook.stetho.Stetho
 import com.mob.MobSDK
 import com.tencent.bugly.Bugly

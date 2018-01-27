@@ -6,7 +6,7 @@ import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
-import cn.chhd.mylibrary.ui.adapter.FragmentAdapter
+import com.chhd.android.common.ui.adapter.FragmentAdapter
 import cn.chhd.news.R
 import cn.chhd.news.bean.WechatArticle
 import cn.chhd.news.contract.WechatArticleContract

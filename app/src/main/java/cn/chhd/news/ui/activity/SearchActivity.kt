@@ -10,7 +10,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
-import cn.chhd.mylibrary.util.SoftKeyboardUtils
+import com.chhd.android.common.util.SoftKeyboardUtils
 import cn.chhd.news.R
 import cn.chhd.news.bean.NewsArticle
 import cn.chhd.news.contract.SearchContract

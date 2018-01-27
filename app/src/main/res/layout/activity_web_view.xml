@@ -23,7 +23,7 @@
                 android:layout_height="match_parent" />
         </android.support.v4.widget.SwipeRefreshLayout>
 
-        <cn.chhd.mylibrary.ui.view.HorizontalProgressBar
+        <com.chhd.android.common.ui.view.HorizontalProgressBar
             android:id="@+id/progress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

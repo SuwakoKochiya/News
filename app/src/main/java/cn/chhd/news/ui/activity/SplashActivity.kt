@@ -2,7 +2,7 @@ package cn.chhd.news.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
-import cn.chhd.mylibrary.ui.activity.FullScreenActivity
+import com.chhd.android.common.ui.activity.FullScreenActivity
 import cn.chhd.news.R
 import cn.chhd.news.global.App
 import cn.chhd.news.http.SimpleSubscriber

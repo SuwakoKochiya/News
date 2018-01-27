@@ -9,8 +9,8 @@ import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatDelegate
 import android.view.Gravity
-import cn.chhd.mylibrary.util.BottomNavigationViewHelper
-import cn.chhd.mylibrary.util.ToastUtils
+import com.chhd.android.common.util.BottomNavigationViewHelper
+import com.chhd.android.common.util.ToastUtils
 import cn.chhd.news.R
 import cn.chhd.news.global.App
 import cn.chhd.news.global.Constant
@@ -23,8 +23,11 @@ import cn.sharesdk.framework.PlatformActionListener
 import cn.sharesdk.onekeyshare.OnekeyShare
 import com.blankj.utilcode.util.FragmentUtils
 import com.blankj.utilcode.util.LogUtils
+import io.reactivex.Flowable
 import kotlinx.android.synthetic.main.activity_main.*
+import org.reactivestreams.Subscription
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 class MainActivity : BaseActivity() {
 
@@ -56,6 +59,12 @@ class MainActivity : BaseActivity() {
         }
 
         button.setOnClickListener {
+            Flowable
+                    .interval(1, TimeUnit.SECONDS)
+                    .compose(bindToLifecycle())
+                    .subscribe { t ->
+                        LogUtils.i(t)
+                    }
         }
 
     }

@@ -14,9 +14,9 @@ import android.text.format.Formatter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import cn.chhd.mylibrary.util.CacheUtils
-import cn.chhd.mylibrary.util.LauncherUtils
-import cn.chhd.mylibrary.util.ToastUtils
+import com.chhd.android.common.util.CacheUtils
+import com.chhd.android.common.util.LauncherUtils
+import com.chhd.android.common.util.ToastUtils
 import cn.chhd.news.R
 import cn.chhd.news.global.Constant
 import cn.chhd.news.ui.activity.SettingsActivity

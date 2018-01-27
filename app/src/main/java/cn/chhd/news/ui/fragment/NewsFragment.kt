@@ -11,7 +11,7 @@ import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.view.*
 import android.widget.EditText
-import cn.chhd.mylibrary.ui.adapter.FragmentAdapter
+import com.chhd.android.common.ui.adapter.FragmentAdapter
 import cn.chhd.news.R
 import cn.chhd.news.bean.NewsChannel
 import cn.chhd.news.contract.NewsContract

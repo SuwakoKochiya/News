@@ -6,7 +6,7 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import cn.chhd.mylibrary.util.SlideHelper
+import com.chhd.android.common.util.SlideHelper
 import cn.chhd.news.R
 import cn.chhd.news.global.Constant
 import cn.chhd.news.util.SettingsUtils

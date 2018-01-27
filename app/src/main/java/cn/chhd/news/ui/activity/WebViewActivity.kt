@@ -13,7 +13,7 @@ import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.TextView
-import cn.chhd.mylibrary.util.ToastUtils
+import com.chhd.android.common.util.ToastUtils
 import cn.chhd.news.R
 import cn.chhd.news.global.Constant
 import cn.chhd.news.ui.activity.base.ToolbarActivity

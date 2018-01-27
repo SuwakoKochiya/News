@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
-import cn.chhd.mylibrary.ui.adapter.FragmentAdapter
+import com.chhd.android.common.ui.adapter.FragmentAdapter
 import cn.chhd.news.R
 import cn.chhd.news.bean.NewsArticle
 import cn.chhd.news.contract.NewsArticleContract
